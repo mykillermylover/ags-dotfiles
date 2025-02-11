@@ -32,7 +32,7 @@ export default class MediaPlayerService extends GObject.Object {
     this.setCurrentPlayer();
     this.notify('current');
 
-    this.playerBinds = this.#players.map(player =>
+    this.playerBinds = this.#players.map((player) =>
       bind(player, 'metadata').as(() => player),
     );
 
@@ -82,7 +82,7 @@ export default class MediaPlayerService extends GObject.Object {
   private readonly deletePlayer = (_: unknown, player: Mpris.Player) => {
     this.playerBinds.splice(
       this.playerBinds.findIndex(
-        item => item.get().busName === player.busName,
+        (item) => item.get().busName === player.busName,
       ),
       1,
     );
@@ -96,7 +96,7 @@ export default class MediaPlayerService extends GObject.Object {
     this.playerSubs.delete(player.busName);
 
     this.#players.splice(
-      this.#players.findIndex(item => item.busName === player.busName),
+      this.#players.findIndex((item) => item.busName === player.busName),
       1,
     );
 

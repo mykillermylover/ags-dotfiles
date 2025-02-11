@@ -26,14 +26,18 @@ const batteryIconsCharging: Record<number, string> = {
   100: '󰂅',
 };
 
-export const getBatteryIcon = (percentage: number, charging: boolean, isCharged: boolean): string => {
+export const getBatteryIcon = (
+  percentage: number,
+  charging: boolean,
+  isCharged: boolean,
+): string => {
   const percentages = [100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0];
-  const foundPercentage = percentages.find(threshold => threshold <= percentage) ?? 100;
+  const foundPercentage =
+    percentages.find((threshold) => threshold <= percentage) ?? 100;
 
   if (charging) {
     return batteryIconsCharging[foundPercentage];
-  }
-  else if (isCharged) {
+  } else if (isCharged) {
     return '󱟢';
   }
 

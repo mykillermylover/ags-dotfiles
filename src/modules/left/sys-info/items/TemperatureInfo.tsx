@@ -5,13 +5,10 @@ export function TemperatureInfo() {
   const temperature = Temperature.get_default();
 
   return (
-    <label
-      className="GroupItem"
-    >
-      {
-        bind(temperature, 'temperature')
-          .as(value => ' ' + value.toFixed(0) + '℃')
-      }
+    <label className="GroupItem">
+      {bind(temperature, 'temperature').as(
+        (value) => ' ' + value.toFixed(0) + '℃',
+      )}
     </label>
   );
 }

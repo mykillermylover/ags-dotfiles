@@ -36,8 +36,10 @@ export function MediaPlayer() {
         const label = bind(value, 'metadata').as(() => {
           const icon = getPlayIcon(value);
           const playerIcon = getPlayerIcon(value);
+          const artist = value.artist || '';
+          const title = value.title || '';
 
-          return `${icon} ${value.artist} - ${value.title} ${playerIcon}`;
+          return `${icon} ${artist} - ${title} ${playerIcon}`;
         });
 
         return (

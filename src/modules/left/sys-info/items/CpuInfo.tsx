@@ -1,7 +1,7 @@
 import { getCoresPercentage, getCpuPercentage } from '@shared';
 
 export function CpuInfo() {
-  const total = getCpuPercentage.as(value => `${value.toFixed(0)}%`);
+  const total = getCpuPercentage.as((value) => `${value.toFixed(0)}%`);
 
   const cores = getCoresPercentage.as((value) => {
     let result = `Total: ${total.get()}`;
@@ -16,8 +16,7 @@ export function CpuInfo() {
   return (
     <label
       className="GroupItem"
-
-      label={total.as(value => ` ${value}`)}
+      label={total.as((value) => ` ${value}`)}
       tooltipMarkup={cores}
     />
   );

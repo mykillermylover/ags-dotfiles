@@ -1,5 +1,5 @@
-import { exec, Variable } from 'astal';
 import { hyprDispatchExec } from '@shared';
+import { exec, Variable } from 'astal';
 
 const initialState = exec('bash -c "matcha -s"') === 'on';
 
@@ -10,13 +10,8 @@ export function IdleInhibitor() {
     hyprDispatchExec('matcha -t');
   };
 
-  const getStateText
-    = (activatedText: string, deactivatedText: string) =>
-      activated(
-        activated => activated
-          ? activatedText
-          : deactivatedText,
-      );
+  const getStateText = (activatedText: string, deactivatedText: string) =>
+    activated((activated) => (activated ? activatedText : deactivatedText));
 
   return (
     <button
@@ -24,15 +19,12 @@ export function IdleInhibitor() {
       className="IdleInhibitor"
       setup={(self) => {
         self.toggleClassName('activated', activated.get());
-        self.hook(
-          activated,
-          () => self.toggleClassName('activated', activated.get()),
+        self.hook(activated, () =>
+          self.toggleClassName('activated', activated.get()),
         );
       }}
-
       tooltipMarkup={getStateText('activated', 'deactivated')}
       label={getStateText('󰅶 ', '󰾪 ')}
-
       onClicked={toggleActivated}
     />
   );

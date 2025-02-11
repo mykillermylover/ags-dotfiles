@@ -1,16 +1,23 @@
-import { GLib, GObject, monitorFile, property, readFileAsync, register } from 'astal';
+import {
+  GLib,
+  GObject,
+  monitorFile,
+  property,
+  readFileAsync,
+  register,
+} from 'astal';
 
 const temperaturePath = '/sys/class/thermal/thermal_zone0/temp';
 
 const tempInfoBytes = GLib.file_get_contents(temperaturePath)[1];
-const initialTemperature = Number(new TextDecoder('utf8').decode(tempInfoBytes)) / 1000 || 0;
+const initialTemperature =
+  Number(new TextDecoder('utf8').decode(tempInfoBytes)) / 1000 || 0;
 
 @register({ GTypeName: 'Temperature' })
 export default class Temperature extends GObject.Object {
   static instance: Temperature;
   static get_default() {
-    if (!this.instance)
-      this.instance = new Temperature();
+    if (!this.instance) this.instance = new Temperature();
 
     return this.instance;
   }
@@ -18,7 +25,9 @@ export default class Temperature extends GObject.Object {
   #temperature = initialTemperature;
 
   @property(Number)
-  get temperature() { return this.#temperature; }
+  get temperature() {
+    return this.#temperature;
+  }
 
   constructor() {
     super();

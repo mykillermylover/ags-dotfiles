@@ -1,7 +1,7 @@
-import Wp from 'gi://AstalWp';
-import { bind, exec, execAsync, Variable } from 'astal';
 import { getIcon } from '@modules/right/sound/helpers';
+import { bind, execAsync, Variable } from 'astal';
 import type { Astal } from 'astal/gtk3';
+import Wp from 'gi://AstalWp';
 
 const wireplumber = Wp.get_default();
 const audioService = wireplumber?.audio;
@@ -14,7 +14,9 @@ export function SoundControl() {
   const setVolume = (percentage: number, mode: 'up' | 'down') => {
     const value = mode === 'up' ? percentage / 100 : -percentage / 100;
 
-    audioService.defaultSpeaker.set_volume(audioService.defaultSpeaker.volume + value);
+    audioService.defaultSpeaker.set_volume(
+      audioService.defaultSpeaker.volume + value,
+    );
   };
 
   const label = Variable.derive(
@@ -38,10 +40,8 @@ export function SoundControl() {
   return (
     <eventbox
       cursor="pointer"
-
       onScroll={onScroll}
       onClick={() => execAsync('pavucontrol')}
-
       onDestroy={() => {
         label.drop();
       }}
@@ -51,6 +51,5 @@ export function SoundControl() {
         label={label()}
       />
     </eventbox>
-
   );
 }

@@ -1,4 +1,5 @@
 import eslint from '@eslint/js';
+import tsParser from '@typescript-eslint/parser';
 import eslintPluginPrettier from 'eslint-plugin-prettier/recommended';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
@@ -22,7 +23,7 @@ export default tseslint.config([
         'error',
         {
           singleQuote: true,
-          parser: 'flow',
+          parser: 'typescript',
         },
       ],
       'unicorn/prevent-abbreviations': 'off',
@@ -43,6 +44,8 @@ export default tseslint.config([
           checkArrowFunctions: false,
         },
       ],
+      'unicorn/no-array-callback-reference': 'warn',
+      'unicorn/no-array-for-each': 'warn',
       '@typescript-eslint/no-misused-promises': [
         'error',
         {
@@ -51,10 +54,12 @@ export default tseslint.config([
       ],
     },
     languageOptions: {
+      parser: tsParser,
       parserOptions: {
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
       },
     },
+    ignores: ['node_modules', '@girs', '.idea'],
   },
 ]);

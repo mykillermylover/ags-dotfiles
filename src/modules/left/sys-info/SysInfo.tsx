@@ -1,9 +1,10 @@
+import { execKittyAsync } from '@shared/kitty';
 import { Variable } from 'astal';
 import { Gtk } from 'astal/gtk3';
-import { MemoryInfo } from './items/MemoryInfo';
+
 import { CpuInfo } from './items/CpuInfo';
+import { MemoryInfo } from './items/MemoryInfo';
 import { TemperatureInfo } from './items/TemperatureInfo';
-import { execKittyAsync } from '@shared/kitty';
 
 export function SysInfo() {
   const isVisible = Variable(false);
@@ -16,10 +17,8 @@ export function SysInfo() {
     <eventbox
       className="SysInfo"
       cursor="pointer"
-
       onHover={() => toggleVisible(true)}
       onHoverLost={() => toggleVisible(false)}
-
       onClick={() => execKittyAsync('btop')}
     >
       <box>
@@ -27,10 +26,9 @@ export function SysInfo() {
 
         <revealer
           cursor="pointer"
-          setup={self => self.hook(
-            isVisible,
-            () => self.revealChild = isVisible.get(),
-          )}
+          setup={(self) =>
+            self.hook(isVisible, () => (self.revealChild = isVisible.get()))
+          }
           transitionType={Gtk.RevealerTransitionType.SLIDE_LEFT}
         >
           <box>
