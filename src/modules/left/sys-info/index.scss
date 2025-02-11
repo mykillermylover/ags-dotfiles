@@ -1,0 +1,15 @@
+.SysInfo {
+  padding: 2px 8px;
+  border-radius: 8px;
+
+  &:hover {
+    background-color: #fff;
+    color: black;
+
+    transition-duration: 150ms;
+  }
+  
+  .GroupItem {
+    padding: 0 8px;
+  }
+}

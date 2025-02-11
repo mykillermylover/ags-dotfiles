@@ -1,0 +1,60 @@
+import eslint from '@eslint/js';
+import eslintPluginPrettier from 'eslint-plugin-prettier/recommended';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import eslintPluginUnicorn from 'eslint-plugin-unicorn';
+import tseslint from 'typescript-eslint';
+
+export default tseslint.config([
+  eslint.configs.recommended,
+  ...tseslint.configs.recommendedTypeChecked,
+  ...tseslint.configs.stylisticTypeChecked,
+  eslintPluginUnicorn.configs['flat/recommended'],
+  eslintPluginPrettier,
+  {
+    plugins: {
+      'eslint-plugin-prettier': eslintPluginPrettier,
+      'simple-import-sort': simpleImportSort,
+    },
+    rules: {
+      'simple-import-sort/imports': 'error',
+      'simple-import-sort/exports': 'error',
+      'prettier/prettier': [
+        'error',
+        {
+          singleQuote: true,
+          parser: 'flow',
+        },
+      ],
+      'unicorn/prevent-abbreviations': 'off',
+      'unicorn/filename-case': [
+        'error',
+        {
+          cases: {
+            pascalCase: true,
+            kebabCase: true,
+            camelCase: true,
+          },
+        },
+      ],
+      'unicorn/no-null': 'off',
+      'unicorn/consistent-function-scoping': [
+        'error',
+        {
+          checkArrowFunctions: false,
+        },
+      ],
+      '@typescript-eslint/no-misused-promises': [
+        'error',
+        {
+          checksVoidReturn: false,
+        },
+      ],
+    },
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+]);

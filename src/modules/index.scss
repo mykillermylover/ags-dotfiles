@@ -1,0 +1,9 @@
+@use 'left';
+@use 'center';
+@use 'right';
+
+.Module {
+  border-radius: 8px;
+  padding: 4px 8px;
+  background-color: rgba(0, 0, 0, 0.4);
+}

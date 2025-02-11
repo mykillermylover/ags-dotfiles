@@ -1,0 +1,24 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "compilerOptions": {
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "allowUnreachableCode": false,
+        "baseUrl": "./src",
+        "experimentalDecorators": true,
+        "jsx": "react-jsx",
+        "jsxImportSource": "astal/gtk3",
+        "module": "ES2022",
+        "moduleResolution": "Bundler",
+        "paths": {
+            "@*": [
+                "*"
+            ]
+        },
+        "strict": true,
+        "target": "ES2022",
+        "pretty": true,
+        "resolveJsonModule": true,
+        "skipLibCheck": true
+    }
+}
