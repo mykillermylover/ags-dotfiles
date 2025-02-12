@@ -57,6 +57,7 @@ export default tseslint.config([
       parser: tsParser,
       parserOptions: {
         projectService: true,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         tsconfigRootDir: import.meta.dirname,
       },
     },

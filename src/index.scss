@@ -10,6 +10,7 @@ $bg-color: #{"@theme_bg_color"};
 }
 
 window.Bar {
+  all: unset;
   border: none;
   border-radius: 0;
   min-height: 0;
@@ -30,5 +31,5 @@ window.Bar {
     transition-timing-function: steps(15);
   }
 
-  @import 'modules';
+  @import 'bar/modules';
 }

@@ -1,5 +1,5 @@
-import { Language } from '@modules/right/sys-tray/Language';
-import { TrayItem } from '@modules/right/sys-tray/TrayItem';
+import { Language } from '@bar/modules/right/sys-tray/Language';
+import { TrayItem } from '@bar/modules/right/sys-tray/TrayItem';
 import { tray } from '@shared';
 import { bind } from 'astal';
 

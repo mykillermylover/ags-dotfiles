@@ -1,4 +1,4 @@
-import { getBatteryIcon } from '@modules/right/battery/helpers';
+import { getBatteryIcon } from '@bar/modules/right/battery/helpers';
 import { bind, Variable } from 'astal';
 import AstalBattery from 'gi://AstalBattery';
 

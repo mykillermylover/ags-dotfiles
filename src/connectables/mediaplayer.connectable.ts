@@ -1,4 +1,4 @@
-import { getFirstPlayingPlayer } from '@modules/left/player/helpers';
+import { getFirstPlayingPlayer } from '@bar/modules/left/player/helpers';
 import { bind, Binding, GObject, property, register } from 'astal';
 import Mpris from 'gi://AstalMpris';
 

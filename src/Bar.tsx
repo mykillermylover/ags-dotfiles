@@ -1,6 +1,6 @@
-import { CenterModule } from '@modules/center/CenterModule';
-import { LeftModule } from '@modules/left/LeftModule';
-import { RightModule } from '@modules/right/RightModule';
+import { CenterModule } from '@bar/modules/center/CenterModule';
+import { LeftModule } from '@bar/modules/left/LeftModule';
+import { RightModule } from '@bar/modules/right/RightModule';
 import { App, Astal, Gdk, Gtk } from 'astal/gtk3';
 
 const { TOP, LEFT, RIGHT } = Astal.WindowAnchor;

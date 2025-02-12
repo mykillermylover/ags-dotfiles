@@ -1,4 +1,4 @@
-import { execKittyAsync } from '@shared/kitty';
+import { execKittyAsync } from '@shared/globals/kitty';
 import { Variable } from 'astal';
 import { Gtk } from 'astal/gtk3';
 

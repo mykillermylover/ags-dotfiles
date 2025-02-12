@@ -1,5 +1,6 @@
-import { getIcon } from '@modules/right/sound/helpers';
-import { bind, execAsync, Variable } from 'astal';
+import { getIcon } from '@bar/modules/right/sound/helpers';
+import { openMenu } from '@bar/utils/menu.ts';
+import { bind, Variable } from 'astal';
 import type { Astal } from 'astal/gtk3';
 import Wp from 'gi://AstalWp';
 
@@ -41,7 +42,7 @@ export function SoundControl() {
     <eventbox
       cursor="pointer"
       onScroll={onScroll}
-      onClick={() => execAsync('pavucontrol')}
+      onClick={(self) => openMenu(self, 'audio_control')}
       onDestroy={() => {
         label.drop();
       }}
