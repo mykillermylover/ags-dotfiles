@@ -1,4 +1,4 @@
-import { hyprland } from '@shared';
+import { hyprland } from '@shared/globals';
 import { bind, Binding, Variable } from 'astal';
 import Hyprland from 'gi://AstalHyprland';
 
@@ -19,18 +19,13 @@ export function Workspace(props: {
 
   currentFocused.subscribe(onFocus);
 
-  const markUrgent = Variable.derive(
-    [currentUrgent, currentFocused],
-    (urgent, focused) => urgent && !focused,
-  );
-
   return (
     <button
       className="WorkspaceButton"
       setup={(self) => {
-        self.toggleClassName('urgent', markUrgent.get());
-        self.hook(markUrgent, () =>
-          self.toggleClassName('urgent', markUrgent.get()),
+        self.toggleClassName('urgent', currentUrgent.get());
+        self.hook(currentUrgent, () =>
+          self.toggleClassName('urgent', currentUrgent.get()),
         );
 
         self.toggleClassName('focused', currentFocused.get());

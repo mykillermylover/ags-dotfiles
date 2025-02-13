@@ -33,18 +33,22 @@ export function MediaPlayer() {
           return <box />;
         }
 
+        const playerClass = value.identity.toLowerCase();
+
         const label = bind(value, 'metadata').as(() => {
           const icon = getPlayIcon(value);
           const playerIcon = getPlayerIcon(value);
-          const artist = value.artist || '';
-          const title = value.title || '';
+          const artist = value.artist || null;
+          const title = value.title || null;
 
-          return `${icon} ${artist} - ${title} ${playerIcon}`;
+          const labelText = [artist, title].filter(Boolean).join(' - ');
+
+          return `${icon} ${labelText} ${playerIcon}`;
         });
 
         return (
           <button
-            className="MediaPlayer"
+            className={`mediaplayer ${playerClass}`}
             cursor="pointer"
             label={label}
             onClicked={() => value.play_pause()}

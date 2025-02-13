@@ -1,17 +1,10 @@
 import { getIcon } from '@bar/modules/right/sound/helpers';
 import { openMenu } from '@bar/utils/menu.ts';
+import { audioService } from '@shared/globals';
 import { bind, Variable } from 'astal';
 import type { Astal } from 'astal/gtk3';
-import Wp from 'gi://AstalWp';
 
-const wireplumber = Wp.get_default();
-const audioService = wireplumber?.audio;
-
-export function SoundControl() {
-  if (!audioService) {
-    return null;
-  }
-
+export function AudioControl() {
   const setVolume = (percentage: number, mode: 'up' | 'down') => {
     const value = mode === 'up' ? percentage / 100 : -percentage / 100;
 

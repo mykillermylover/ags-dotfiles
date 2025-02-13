@@ -1,6 +1,6 @@
 import { Battery } from '@bar/modules/right/battery/Battery';
 import { PowerMenu } from '@bar/modules/right/PowerMenu';
-import { SoundControl } from '@bar/modules/right/sound/SoundControl';
+import { AudioControl } from '@bar/modules/right/sound/AudioControl.tsx';
 import { Time } from '@bar/modules/right/Time';
 
 import { SystemTray } from './sys-tray/SystemTray';
@@ -13,7 +13,7 @@ export function RightModule() {
       </box>
 
       <box className="right-module-item">
-        <SoundControl />
+        <AudioControl />
       </box>
 
       <box className="right-module-item">

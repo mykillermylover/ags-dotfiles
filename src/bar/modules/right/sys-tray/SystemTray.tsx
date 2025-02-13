@@ -1,6 +1,6 @@
 import { Language } from '@bar/modules/right/sys-tray/Language';
 import { TrayItem } from '@bar/modules/right/sys-tray/TrayItem';
-import { tray } from '@shared';
+import { tray } from '@shared/globals';
 import { bind } from 'astal';
 
 export function SystemTray() {

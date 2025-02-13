@@ -1,4 +1,8 @@
-import { closeAllDropdowns, globalDropdownEventBoxes, hyprland } from '@shared';
+import {
+  closeAllDropdowns,
+  globalDropdownEventBoxes,
+  hyprland,
+} from '@shared/globals';
 import { App, Gtk } from 'astal/gtk3';
 
 export function openMenu(clickedWidget: Gtk.Widget, name: string) {

@@ -1,4 +1,4 @@
-import { hyprland } from '@shared';
+import { hyprland } from '@shared/globals';
 import { exec, Variable } from 'astal';
 
 const initialLayout = exec(

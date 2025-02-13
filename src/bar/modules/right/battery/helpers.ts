@@ -35,10 +35,11 @@ export const getBatteryIcon = (
   const foundPercentage =
     percentages.find((threshold) => threshold <= percentage) ?? 100;
 
+  if (isCharged) {
+    return '󱟢';
+  }
   if (charging) {
     return batteryIconsCharging[foundPercentage];
-  } else if (isCharged) {
-    return '󱟢';
   }
 
   return batteryIcons[foundPercentage];

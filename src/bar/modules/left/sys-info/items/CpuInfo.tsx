@@ -1,4 +1,4 @@
-import { getCoresPercentage, getCpuPercentage } from '@shared';
+import { getCoresPercentage, getCpuPercentage } from '@shared/globals';
 
 export function CpuInfo() {
   const total = getCpuPercentage.as((value) => `${value.toFixed(0)}%`);

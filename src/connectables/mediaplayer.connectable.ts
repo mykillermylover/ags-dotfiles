@@ -1,65 +1,84 @@
 import { getFirstPlayingPlayer } from '@bar/modules/left/player/helpers';
-import { bind, Binding, GObject, property, register } from 'astal';
+import { mprisService } from '@shared/globals';
+import { bind, GObject, property, register } from 'astal';
 import Mpris from 'gi://AstalMpris';
-
-const mpris = Mpris.get_default();
+const { PLAYING } = Mpris.PlaybackStatus;
 
 @register({ GTypeName: 'MediaPlayerService' })
 export default class MediaPlayerService extends GObject.Object {
-  #current: Mpris.Player | undefined;
+  static instance: MediaPlayerService;
 
+  static get_default() {
+    if (!this.instance) {
+      this.instance = new MediaPlayerService();
+    }
+
+    return this.instance;
+  }
+
+  #current: Mpris.Player | undefined;
   @property(Mpris.Player)
   get current() {
     return this.#current;
   }
 
   readonly #players: Mpris.Player[];
-
   @property()
   get players() {
     return this.#players;
   }
 
-  private readonly playerBinds: Binding<Mpris.Player>[];
+  get isCurrentPlaying() {
+    return this.#current?.playback_status === PLAYING;
+  }
 
   private readonly playerSubs = new Map<string, () => void>();
 
   constructor() {
     super();
 
-    this.#players = mpris.players;
+    this.#players = mprisService.players;
     this.notify('players');
+
     this.setCurrentPlayer();
-    this.notify('current');
 
-    this.playerBinds = this.#players.map((player) =>
-      bind(player, 'metadata').as(() => player),
-    );
+    for (const player of this.players) {
+      const playerBind = bind(player, 'metadata').as(() => player);
 
-    for (const playerBind of this.playerBinds) {
       this.playerSubs.set(
         playerBind.get().busName,
         playerBind.subscribe(this.playerChanged),
       );
     }
 
-    mpris.connect('player-added', this.addPlayer);
-    mpris.connect('player-closed', this.deletePlayer);
+    mprisService.connect('player-added', this.addPlayer);
+    mprisService.connect('player-closed', this.deletePlayer);
+  }
+
+  private haveOtherPlayingPlayers(player: Mpris.Player) {
+    return this.#players.some(
+      (otherPlayer) =>
+        otherPlayer.playback_status === PLAYING &&
+        otherPlayer.busName !== player.busName,
+    );
+  }
+
+  private isLastPausedPlayer(player: Mpris.Player) {
+    return (
+      player.playback_status !== PLAYING &&
+      !this.haveOtherPlayingPlayers(player)
+    );
   }
 
   private readonly playerChanged = (player: Mpris.Player) => {
-    if (player.busName === this.#current?.busName) return;
+    if (this.isLastPausedPlayer(player) || this.isCurrentPlaying) {
+      return;
+    }
 
     this.setCurrentPlayer();
   };
 
   private readonly setCurrentPlayer = (deletingCurrent = false) => {
-    if (this.#players.length === 0) {
-      this.#current = undefined;
-      this.notify('current');
-      return;
-    }
-
     this.#current = getFirstPlayingPlayer(
       this.#players,
       deletingCurrent ? undefined : this.#current,
@@ -69,7 +88,6 @@ export default class MediaPlayerService extends GObject.Object {
 
   private readonly addPlayer = (_: unknown, player: Mpris.Player) => {
     const newBind = bind(player, 'metadata').as(() => player);
-    this.playerBinds.push(newBind);
 
     this.playerSubs.set(player.busName, newBind.subscribe(this.playerChanged));
 
@@ -80,13 +98,6 @@ export default class MediaPlayerService extends GObject.Object {
   };
 
   private readonly deletePlayer = (_: unknown, player: Mpris.Player) => {
-    this.playerBinds.splice(
-      this.playerBinds.findIndex(
-        (item) => item.get().busName === player.busName,
-      ),
-      1,
-    );
-
     const unsub = this.playerSubs.get(player.busName);
 
     if (!unsub) return;
@@ -103,14 +114,4 @@ export default class MediaPlayerService extends GObject.Object {
     this.notify('players');
     this.setCurrentPlayer(player.busName === this.#current?.busName);
   };
-
-  static instance: MediaPlayerService;
-
-  static get_default() {
-    if (!this.instance) {
-      this.instance = new MediaPlayerService();
-    }
-
-    return this.instance;
-  }
 }

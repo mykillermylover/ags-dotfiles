@@ -1,4 +1,4 @@
-import { isLeftClick, isRightClick } from '@shared';
+import { isLeftClick, isRightClick } from '@shared/globals';
 import { bind, Gio } from 'astal';
 import { Astal, Gdk, Gtk } from 'astal/gtk3';
 import { Button } from 'astal/gtk3/widget';

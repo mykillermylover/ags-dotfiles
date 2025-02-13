@@ -1,4 +1,4 @@
-import { getMemory, getMemoryPercentage } from '@shared';
+import { getMemory, getMemoryPercentage } from '@shared/globals';
 
 export function MemoryInfo() {
   const memPercentage = getMemoryPercentage();

@@ -1,4 +1,4 @@
-import { globalDropdownEventBoxes } from '@shared';
+import { globalDropdownEventBoxes } from '@shared/globals';
 import { App, Astal, Gdk, Gtk } from 'astal/gtk3';
 
 import { DropdownProps } from './interfaces.ts';

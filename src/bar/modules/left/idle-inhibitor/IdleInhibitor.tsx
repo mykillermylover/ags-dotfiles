@@ -1,4 +1,4 @@
-import { hyprDispatchExec } from '@shared';
+import { hyprDispatchExec } from '@shared/globals';
 import { exec, Variable } from 'astal';
 
 const initialState = exec('bash -c "matcha -s"') === 'on';

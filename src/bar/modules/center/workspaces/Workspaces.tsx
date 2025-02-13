@@ -1,4 +1,4 @@
-import { hyprland } from '@shared';
+import { hyprland } from '@shared/globals';
 import { bind, Variable } from 'astal';
 import Hyprland from 'gi://AstalHyprland';
 
@@ -7,10 +7,13 @@ import { Workspace } from './Workspace';
 export function Workspaces(props: { monitorModel: string }) {
   const { monitorModel } = props;
 
-  const urgentWorkspaceId: Variable<number> = Variable(Infinity);
+  const urgentWorkspaceId = Variable(Infinity);
+  const focusedWorkspaceId = Variable(Infinity);
 
   const onWorkspaceFocus = (workspaceId: number, focused: boolean) => {
     if (!focused) return;
+
+    focusedWorkspaceId.set(workspaceId);
     if (urgentWorkspaceId.get() === workspaceId) {
       urgentWorkspaceId.set(Infinity);
     }
@@ -25,7 +28,9 @@ export function Workspaces(props: { monitorModel: string }) {
         <Workspace
           workspace={workspace}
           currentUrgent={urgentWorkspaceId(
-            (workspaceId) => workspaceId === workspace.id,
+            (urgentId) =>
+              workspace.id !== focusedWorkspaceId.get() &&
+              urgentId === workspace.id,
           )}
           onFocus={(value) => onWorkspaceFocus(workspace.id, value)}
         />
@@ -35,9 +40,10 @@ export function Workspaces(props: { monitorModel: string }) {
     <box
       className="Workspaces"
       setup={(self) => {
-        self.hook(hyprland, 'urgent', (_, client: Hyprland.Client) =>
-          urgentWorkspaceId.set(client.workspace.id),
-        );
+        self.hook(hyprland, 'urgent', (_, client?: Hyprland.Client) => {
+          if (!client) return;
+          urgentWorkspaceId.set(client.workspace.id);
+        });
       }}
     >
       {bind(hyprland, 'workspaces').as(workspacesCallback)}
