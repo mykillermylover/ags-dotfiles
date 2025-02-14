@@ -1,4 +1,4 @@
-import { getFirstPlayingPlayer } from '@bar/modules/left/player/helpers';
+import { getFirstPlayingPlayer } from '@bar/components/mediaplayer/helpers';
 import { mprisService } from '@shared/globals';
 import { bind, GObject, property, register } from 'astal';
 import Mpris from 'gi://AstalMpris';
@@ -94,7 +94,7 @@ export default class MediaPlayerService extends GObject.Object {
     this.#players.unshift(player);
     this.notify('players');
 
-    this.setCurrentPlayer();
+    this.playerChanged(player);
   };
 
   private readonly deletePlayer = (_: unknown, player: Mpris.Player) => {

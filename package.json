@@ -2,6 +2,12 @@
     "dependencies": {
         "astal": "/usr/share/astal/gjs"
     },
+    "scripts": {
+        "lint": "eslint --ignore-pattern '@girs/**'",
+        "lint-fix": "eslint --ignore-pattern '@girs/**' --fix",
+        "bundle": "ags bundle app.ts astal-shell",
+        "build": "npm run bundle && chmod +x ./astal-shell && mv -f astal-shell ~/.bin/"
+    },
     "devDependencies": {
         "@eslint/js": "^9.20.0",
         "@types/node": "^22.13.1",
