@@ -1,0 +1,53 @@
+@use '../variables' as *;
+@use 'sass:color';
+
+@keyframes blink {
+  to {
+    background-color: $secondary-container;
+    color: $on-secondary-container;
+  }
+}
+
+.workspaces {
+  .workspace-button {
+    padding: 0;
+    margin: 0 $button-padding;
+
+    label {
+      border: $outline 1px solid;
+      padding: $half-button-padding $button-padding;
+      border-radius: calc($border-radius / 2);
+    }
+
+    &.focused label {
+      background: $tertiary;
+      color: $on-tertiary;
+
+      padding-left: calc($container-padding * 1.5);
+      padding-right: calc($container-padding * 1.5);
+    }
+
+    &.urgent label {
+
+      animation-name: blink;
+      animation-duration: 1s;
+      animation-timing-function: steps(12);
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    }
+
+    &:hover:not(.focused) label {
+      background: $primary-container;
+      color: $on-primary-container;
+      padding: 0 calc($button-padding * 1.5);
+    }
+  }
+
+
+  >:first-child {
+    margin-left: 0;
+  }
+  >:last-child {
+    margin-right: 0;
+  }
+}

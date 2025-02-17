@@ -1,0 +1,5 @@
+@use '../variables/variables' as *;
+
+.bar-container {
+  margin: $half-container-padding $container-padding $quarter-container-padding;
+}

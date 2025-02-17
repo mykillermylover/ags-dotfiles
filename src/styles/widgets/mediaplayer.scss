@@ -1,0 +1,20 @@
+@use '../variables' as *;
+@use 'sass:color';
+
+.mediaplayer {
+  border-radius: calc($border-radius / 2);
+}
+.mediaplayer-cover {
+  background-size: cover;
+  background-position: center;
+}
+.mediaplayer-content {
+  background-image: linear-gradient(
+                  color.adjust($inverse-primary, $alpha: -0.25) 0%,
+                  color.adjust($on-tertiary, $alpha: -0.25) 25%,
+                  rgba(0, 0, 0, 0.7) 40%,
+                  rgba(0, 0, 0, 0.75) 50%,
+                  rgba(0, 0, 0, 0.7) 75%,
+                  color.adjust($on-secondary, $alpha: -0.25) 100%
+  );
+}

@@ -23,7 +23,9 @@
         "paths": {
             "@*": [
                 "*"
-            ]
+            ],
+            "astal": ["/usr/share/astal/gjs"],
+            "astal/*": ["/usr/share/astal/gjs/*"]
         },
         "pretty": true,
         "resolveJsonModule": true,

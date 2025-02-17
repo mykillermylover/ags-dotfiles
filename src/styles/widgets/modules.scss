@@ -1,0 +1,14 @@
+@use '../variables' as *;
+
+.module {
+  padding: $quarter-container-padding;
+
+  .module-item {
+    margin: 0 $half-container-padding;
+    padding: $quarter-container-padding $half-container-padding;
+  }
+}
+
+.module-separator {
+  margin: $button-padding 0;
+}

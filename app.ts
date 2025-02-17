@@ -1,8 +1,8 @@
 #!/usr/bin/gjs -m
 import Bar from '@bar/Bar';
+import { Popups } from '@bar/widgets/popups';
 import { registerWindows } from '@shared/utils';
 import { App } from 'astal/gtk3';
-import { Popups } from 'bar/components/popups';
 
 import style from './style.scss';
 

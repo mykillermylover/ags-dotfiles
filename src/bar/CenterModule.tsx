@@ -1,13 +1,13 @@
-import { Gdk } from 'astal/gtk3';
+import { Media } from '@bar/widgets/media-button/Media';
+import { Time } from '@bar/widgets/Time';
+import { Gtk } from 'astal/gtk3';
 
-import { Workspaces } from './components/workspaces/Workspaces';
-
-export function CenterModule(props: { monitor: Gdk.Monitor }) {
-  const { monitor } = props;
-
+export function CenterModule() {
   return (
-    <box>
-      <Workspaces monitorModel={monitor.model} />
+    <box halign={Gtk.Align.CENTER} className="container center-module module">
+      <Time />
+
+      <Media />
     </box>
   );
 }

@@ -1,18 +1,30 @@
-import { AppMenu } from './components/AppMenu';
-import { IdleInhibitor } from './components/IdleInhibitor';
-import { MediaPlayer } from './components/mediaplayer/MediaPlayer';
-import { SysInfo } from './components/sys-info/SysInfo';
+import { AppMenu } from '@bar/widgets/AppMenu';
+import { IdleInhibitor } from '@bar/widgets/IdleInhibitor';
+import { ModuleSeparator } from '@bar/widgets/ModuleSeparator';
+import { SysInfo } from '@bar/widgets/sys-info/SysInfo';
+import { Workspaces } from '@bar/widgets/workspaces/Workspaces';
+import { Gdk, Gtk } from 'astal/gtk3';
 
-export function LeftModule() {
+interface LeftModuleProps {
+  gdkMonitor: Gdk.Monitor;
+}
+
+export function LeftModule({ gdkMonitor }: LeftModuleProps) {
   return (
-    <>
+    <box
+      hexpand
+      halign={Gtk.Align.START}
+      className="container module left-module"
+    >
       <AppMenu />
 
       <SysInfo />
 
-      <MediaPlayer />
+      <ModuleSeparator />
+      <Workspaces monitorModel={gdkMonitor.model} />
+      <ModuleSeparator />
 
       <IdleInhibitor />
-    </>
+    </box>
   );
 }

@@ -1,0 +1,58 @@
+@use '../variables' as *;
+@use 'shared';
+
+menu {
+  @extend .container;
+  border-radius: $border-radius;
+  border: 1px solid $outline;
+
+  menuitem {
+    transition: background-color 75ms steps(10);
+    min-height: 20px;
+    min-width: 40px;
+    padding: $button-padding $double-container-padding;
+    border-radius: calc($border-radius / 2);
+
+    &:hover,
+    &:active {
+      background-color: $background;
+    }
+
+    &:disabled {
+      color: $on-primary;
+    }
+
+    arrow {
+      min-height: 16px;
+      min-width: 16px;
+      -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
+      margin-left: 8px;
+    }
+  }
+
+  separator {
+    min-height: 1px;
+    margin: 4px 0;
+    background-color: $background;
+  }
+}
+
+menu > arrow {
+  min-height: 16px;
+  min-width: 16px;
+  padding: 4px;
+  color: $primary;
+}
+
+menu > arrow.top {
+  margin-top: 0;
+  border-radius: 6px;
+  -gtk-icon-source: -gtk-icontheme('pan-up-symbolic');
+}
+
+menu > arrow.bottom {
+  margin-top: 8px;
+  margin-bottom: -12px;
+  border-radius: 6px;
+  -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
+}

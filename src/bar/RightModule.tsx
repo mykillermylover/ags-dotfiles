@@ -1,31 +1,26 @@
-import { Battery } from './components/battery/Battery';
-import { PowerMenu } from './components/PowerMenu';
-import { AudioControl } from './components/sound/AudioControl';
-import { SystemTray } from './components/sys-tray/SystemTray';
-import { Time } from './components/Time';
+import { Battery } from '@bar/widgets/battery/Battery';
+import { ModuleSeparator } from '@bar/widgets/ModuleSeparator';
+import { PowerMenu } from '@bar/widgets/PowerMenu';
+import { AudioControl } from '@bar/widgets/sound/AudioControl';
+import { SystemTray } from '@bar/widgets/sys-tray/SystemTray';
+import { Gtk } from 'astal/gtk3';
 
 export function RightModule() {
   return (
-    <>
-      <box className="right-module-item">
-        <SystemTray />
-      </box>
+    <box
+      hexpand
+      halign={Gtk.Align.END}
+      className="container right-module module"
+    >
+      <SystemTray />
+      <ModuleSeparator />
 
-      <box className="right-module-item">
-        <AudioControl />
-      </box>
+      <AudioControl />
 
-      <box className="right-module-item">
-        <Battery />
-      </box>
+      <Battery />
 
-      <box className="right-module-item">
-        <Time />
-      </box>
-
-      <box className="right-module-item">
-        <PowerMenu />
-      </box>
-    </>
+      <ModuleSeparator />
+      <PowerMenu />
+    </box>
   );
 }

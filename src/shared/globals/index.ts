@@ -1,6 +1,5 @@
 export * from './hyprland';
 export * from './kitty';
-export * from './mouse-click-helpers';
 export * from './mpris';
 export * from './popups';
 export * from './sys-info';

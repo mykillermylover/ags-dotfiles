@@ -36,6 +36,13 @@ export function openPopup(clickedWidget: Gtk.Widget, name: string) {
     marginLeft = 8;
   }
 
-  eventBox?.set_margin_left(marginLeft);
-  eventBox?.set_margin_top(marginTop);
+  const eventBoxClassName = eventBox.get_class_name();
+
+  if (!eventBoxClassName.includes('valign')) {
+    eventBox?.set_margin_top(marginTop);
+  }
+
+  if (!eventBoxClassName.includes('halign')) {
+    eventBox?.set_margin_left(marginLeft);
+  }
 }

@@ -1,7 +1,7 @@
-import { getFirstPlayingPlayer } from '@bar/components/mediaplayer/helpers';
 import { mprisService } from '@shared/globals';
 import { bind, GObject, property, register } from 'astal';
 import Mpris from 'gi://AstalMpris';
+
 const { PLAYING } = Mpris.PlaybackStatus;
 
 @register({ GTypeName: 'MediaPlayerService' })
@@ -20,6 +20,12 @@ export default class MediaPlayerService extends GObject.Object {
   @property(Mpris.Player)
   get current() {
     return this.#current;
+  }
+
+  public onMetaChange<T>(callBack: () => T) {
+    if (this.#current) {
+      return bind(this.#current, 'metadata').as(callBack);
+    }
   }
 
   readonly #players: Mpris.Player[];
@@ -63,9 +69,14 @@ export default class MediaPlayerService extends GObject.Object {
     );
   }
 
+  private isOnlyPlayerLeft(player: Mpris.Player) {
+    return this.players.length === 1 && this.players[0] === player;
+  }
+
   private isLastPausedPlayer(player: Mpris.Player) {
     return (
       player.playback_status !== PLAYING &&
+      !this.isOnlyPlayerLeft(player) &&
       !this.haveOtherPlayingPlayers(player)
     );
   }
@@ -79,7 +90,7 @@ export default class MediaPlayerService extends GObject.Object {
   };
 
   private readonly setCurrentPlayer = (deletingCurrent = false) => {
-    this.#current = getFirstPlayingPlayer(
+    this.#current = this.getFirstPlayingPlayer(
       this.#players,
       deletingCurrent ? undefined : this.#current,
     );
@@ -114,4 +125,21 @@ export default class MediaPlayerService extends GObject.Object {
     this.notify('players');
     this.setCurrentPlayer(player.busName === this.#current?.busName);
   };
+
+  private getFirstPlayingPlayer(
+    players: Mpris.Player[],
+    currentPlayer?: Mpris.Player,
+  ) {
+    if (players.length === 0) {
+      return;
+    }
+
+    for (const player of players) {
+      if (player.playback_status === Mpris.PlaybackStatus.PLAYING) {
+        return player;
+      }
+    }
+
+    return currentPlayer ?? players[0];
+  }
 }

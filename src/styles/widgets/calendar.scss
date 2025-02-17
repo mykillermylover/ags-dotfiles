@@ -1,0 +1,40 @@
+@use '../variables' as *;
+@use 'sass:color';
+
+.calendar {
+  border-radius: 0.4em;
+  color: $primary;
+
+  &:selected {
+    background: color.adjust($on-primary, $lightness: -5%);
+  }
+
+  &.header {
+    background-color: transparent;
+    color: $primary;
+  }
+
+  &.button {
+    font-weight: 900;
+    font-size: 900em;
+  }
+
+  &:hover {
+    background: color.adjust($on-primary, $lightness: 10%);
+  }
+
+  &.highlight {
+    color: $outline;
+  }
+
+  &:indeterminate {
+    color: color.adjust($primary, $alpha: -0.75);
+  }
+
+  font-size: 1.1em;
+  padding: 0.35em;
+}
+
+label.calendar-icon {
+  padding-right: $button-padding;
+}
