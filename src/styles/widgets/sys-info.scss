@@ -1,0 +1,15 @@
+@use '../variables' as *;
+
+.sys-info {
+  border-radius: calc($border-radius / 2);
+  background: $secondary;
+
+  label {
+    color: $on-secondary;
+  }
+
+  .sys-info-item {
+    margin: 0 $button-padding;
+    padding: calc($half-button-padding / 2) 0;
+  }
+}

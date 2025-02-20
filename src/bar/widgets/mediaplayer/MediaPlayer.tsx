@@ -1,21 +1,21 @@
-import { MediaPlayerService } from '@connectables';
 import { bind } from 'astal';
 
-import { MediaPlayerControl } from './widgets';
+import { PlayerProps } from './player.props';
+import { SongControls } from './widgets/controls';
+import { SongInfo } from './widgets/info';
+import { MediaPlayerContainer } from './widgets/MediaPlayerContainer';
 
-const mediaPlayer = MediaPlayerService.get_default();
-
-export function MediaPlayer() {
-  const player = bind(mediaPlayer, 'current');
+export function MediaPlayer({ player }: PlayerProps) {
+  const coverArt = bind(player, 'coverArt').as(
+    (coverArt) => `
+      background-image: url("${coverArt}");`,
+  );
 
   return (
-    <>
-      {player.as((value) => {
-        if (!value) {
-          return <></>;
-        }
-        return <MediaPlayerControl player={value} />;
-      })}
-    </>
+    <MediaPlayerContainer coverArt={coverArt}>
+      <SongInfo player={player} />
+
+      <SongControls player={player} />
+    </MediaPlayerContainer>
   );
 }

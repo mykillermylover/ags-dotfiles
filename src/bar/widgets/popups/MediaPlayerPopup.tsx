@@ -1,4 +1,4 @@
-import { MediaPlayer } from '@bar/widgets/mediaplayer/MediaPlayer';
+import { MediaPlayerWidget } from '@bar/widgets/mediaplayer';
 import { MediaPlayerService } from '@connectables';
 import { Popup } from '@shared/widgets';
 import { bind } from 'astal';
@@ -8,8 +8,12 @@ export function MediaPlayerPopup() {
   const { CENTER } = Gtk.Align;
   const player = bind(MediaPlayerService.get_default(), 'current');
   return (
-    <Popup position={[CENTER]} name={'mediaplayer'}>
-      <MediaPlayer player={player} />
+    <Popup
+      position={[CENTER]}
+      name={'mediaplayer'}
+      className="container mediaplayer-popup"
+    >
+      <MediaPlayerWidget player={player} />
     </Popup>
   );
 }

@@ -13,12 +13,14 @@ const MIDDLE_BUTTON = Astal.MouseButton.MIDDLE;
 
 // eslint-disable-next-line prettier/prettier
 export function isLeftClick(button: Astal.MouseButton): button is PRIMARY_BUTTON;
-export function isLeftClick(event: Astal.ClickEvent): boolean;
+export function isLeftClick(event: Gdk.Event | Astal.ClickEvent): boolean;
 export function isLeftClick(
-  eventOrButton: Astal.ClickEvent | Astal.MouseButton,
+  eventOrButton: Gdk.Event | Astal.ClickEvent | Astal.MouseButton,
 ) {
   if (eventOrButton instanceof Astal.ClickEvent) {
     return eventOrButton.button === PRIMARY_BUTTON;
+  } else if (eventOrButton instanceof Gdk.Event) {
+    return eventOrButton.get_button()[1] === PRIMARY_BUTTON;
   }
   return eventOrButton === PRIMARY_BUTTON;
 }
@@ -26,12 +28,14 @@ export function isLeftClick(
 export function isRightClick(
   button: Astal.MouseButton,
 ): button is SECONDARY_BUTTON;
-export function isRightClick(event: Astal.ClickEvent): boolean;
+export function isRightClick(event: Gdk.Event | Astal.ClickEvent): boolean;
 export function isRightClick(
-  eventOrButton: Astal.ClickEvent | Astal.MouseButton,
+  eventOrButton: Gdk.Event | Astal.ClickEvent | Astal.MouseButton,
 ) {
   if (eventOrButton instanceof Astal.ClickEvent) {
     return eventOrButton.button === SECONDARY_BUTTON;
+  } else if (eventOrButton instanceof Gdk.Event) {
+    return eventOrButton.get_button()[1] === SECONDARY_BUTTON;
   }
   return eventOrButton === SECONDARY_BUTTON;
 }

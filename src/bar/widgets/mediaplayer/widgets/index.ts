@@ -1,1 +1,1 @@
-export { MediaPlayerControl } from './MediaPlayerControl';
+export { MediaPlayer } from '../MediaPlayer';

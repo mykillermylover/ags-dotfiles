@@ -1,0 +1,85 @@
+@use '../variables' as *;
+@use "sass:color";
+
+.notification-card * {
+  font-family: "MesloLGS Nerd Font", serif;
+}
+
+.notification-card {
+
+  margin: $button-padding $container-padding;
+  box-shadow: 2px 0 4px 0 color.adjust(black, $alpha: -0.5);
+  border-radius: $border-radius;
+
+  &.critical {
+    border: 1px solid $error-container;
+
+    .app-name, .app-icon {
+      color: $error-container;
+    }
+  }
+
+  .header * {
+    color: color.adjust($primary, $alpha: -0.4);
+  }
+
+  .header {
+    padding: $button-padding;
+
+    .app-icon {
+      margin-left: $button-padding;
+    }
+
+    .app-name {
+      margin-left: $button-padding;
+      margin-right: $button-padding;
+      font-weight: bold;
+    }
+
+    .time {
+      margin: 0 $button-padding;
+    }
+
+    button {
+      padding: $half-button-padding;
+      min-width: 0;
+      min-height: 0;
+    }
+  }
+
+  separator {
+    margin: 0 $container-padding;
+  }
+
+  .content {
+    margin: $button-padding $container-padding $container-padding;
+
+    .summary {
+      font-size: 1.2em;
+      color: $on-background;
+    }
+
+    .body {
+      color: color.adjust($on-background, $alpha: -0.2);
+    }
+
+    .image {
+      border: 1px solid $outline;
+      margin-right: $container-padding;
+      border-radius: 100%;
+      min-width: calc($container-padding * 8);
+      min-height: calc($container-padding * 8);
+      background-size: contain;
+      background-position: center;
+    }
+  }
+
+  .actions {
+    margin: $button-padding;
+    margin-top: 0;
+
+    button {
+      margin: 0 $button-padding;
+    }
+  }
+}

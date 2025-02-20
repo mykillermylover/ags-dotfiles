@@ -1,45 +1,57 @@
 @use '../variables' as *;
 @use 'sass:color';
 
-@keyframes blink {
+@keyframes blinkButton {
   to {
     background-color: $secondary-container;
+  }
+}
+@keyframes blinkLabel {
+  to {
     color: $on-secondary-container;
   }
 }
 
 .workspaces {
   .workspace-button {
-    padding: 0;
     margin: 0 $button-padding;
+    border: $outline 1px solid;
 
-    label {
-      border: $outline 1px solid;
-      padding: $half-button-padding $button-padding;
-      border-radius: calc($border-radius / 2);
-    }
+    padding: $half-button-padding $button-padding;
 
-    &.focused label {
+    &.focused {
       background: $tertiary;
-      color: $on-tertiary;
+      label {
+        color: $on-tertiary;
+      }
 
       padding-left: calc($container-padding * 1.5);
       padding-right: calc($container-padding * 1.5);
     }
 
-    &.urgent label {
-
-      animation-name: blink;
+    &.urgent {
+      animation-name: blinkButton;
       animation-duration: 1s;
-      animation-timing-function: steps(12);
       animation-iteration-count: infinite;
       animation-direction: alternate;
+
+      label {
+        animation-name: blinkLabel;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+      }
     }
 
-    &:hover:not(.focused) label {
+    &:hover:not(.focused) {
+      label {
+        color: $on-primary-container;
+      }
       background: $primary-container;
-      color: $on-primary-container;
-      padding: 0 calc($button-padding * 1.5);
+      padding-left: calc($button-padding * 1.5);
+      padding-right: calc($button-padding * 1.5);
+
+      transition-duration: 50ms;
     }
   }
 

@@ -5,7 +5,7 @@ export function MemoryInfo() {
 
   return (
     <label
-      className="GroupItem"
+      className="sys-info-item"
       label={memPercentage.as((val) => ` ${val}%`)}
       tooltipMarkup={getMemory('GiB').as(({ user, total }) => {
         const userGiB = user.toFixed(1);

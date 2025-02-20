@@ -3,11 +3,9 @@
 
 * {
   all: unset;
-  font-family: 'JetBrainsMono NF', 'MesloLGL Nerd Font', serif;
+  font-family: 'JetBrainsMono NF', 'MesloLGS Nerd Font', serif;
   font-size: $font-size;
   color: $on-background;
-
-  transition-timing-function: steps(24);
 }
 
 .container {
@@ -18,10 +16,38 @@
 }
 
 button, .button {
-  &.action {
+  &.primary {
     background: $primary;
     & > * {
       color: $on-primary;
+    }
+  }
+  &.reverse-primary {
+    background: $on-primary;
+    border: $outline 1px solid;
+    & > * {
+      color: $primary;
+    }
+  }
+  &.secondary {
+    background: $secondary;
+    & > * {
+      color: $on-secondary;
+    }
+  }
+  &.reverse-secondary {
+    background: $on-secondary;
+    border: $outline 1px solid;
+    & > * {
+      color: $secondary;
+    }
+  }
+  &.primary, &.reverse-primary, &.secondary, &.reverse-secondary {
+    &:hover {
+      box-shadow: 0 0 2px 0 color.adjust(black, $alpha: -0.3) inset;
+    }
+    &:active {
+      box-shadow: 0 0 4px 0 color.adjust(black, $alpha: -0.3) inset;
     }
   }
 
@@ -48,7 +74,7 @@ button.txt-icon, label.txt-icon {
 tooltip {
   @extend .container;
   box-shadow: none;
-  background: color.adjust($on-primary, $alpha: -0.1, $lightness: -10%);
+  background: color.adjust($on-primary, $alpha: -0.1, $lightness: -5%);
 }
 
 switch {
@@ -103,7 +129,7 @@ scale {
   trough {
     transition: background-color 75ms cubic-bezier(0, 0, 0.2, 1);
     outline: none;
-    background-color: $surface
+    background-color: $surface-container-highest
   }
 
   highlight {
@@ -128,19 +154,19 @@ scale {
     border-radius: 100%;
     color: $on-primary-container;
     background-color: $primary-container;
-    box-shadow: inset 0 0 0 2px $on-primary-container;
+    box-shadow: inset 0 0 0 2px $surface;
   }
 
   slider:hover {
     box-shadow:
-            inset 0 0 0 2px $on-primary-container,
-            0 0 0 8px color.adjust($on-primary-container, $alpha: -0.9);
+            inset 0 0 0 2px $outline,
+            0 0 0 8px color.adjust($outline, $alpha: -0.9);
   }
 
   slider:active {
     box-shadow:
-            inset 0 0 0 4px $on-primary-container,
-            0 0 0 8px color.adjust($on-primary-container, $alpha: -0.9);
+            inset 0 0 0 4px $outline,
+            0 0 0 8px color.adjust($outline, $alpha: -0.9);
   }
 }
 

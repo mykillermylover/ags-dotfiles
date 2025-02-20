@@ -1,7 +1,7 @@
 import { systemTime } from '@shared/globals';
 import { openPopup } from '@shared/utils';
 
-export function Time() {
+export function Clock() {
   return (
     <button
       className="module-item"

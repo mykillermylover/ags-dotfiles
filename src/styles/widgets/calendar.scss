@@ -20,7 +20,7 @@
   }
 
   &:hover {
-    background: color.adjust($on-primary, $lightness: 10%);
+    background: color.adjust($on-primary, $lightness: -10%);
   }
 
   &.highlight {

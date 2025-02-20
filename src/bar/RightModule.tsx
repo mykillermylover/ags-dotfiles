@@ -1,8 +1,8 @@
-import { Battery } from '@bar/widgets/battery/Battery';
+import { Battery } from '@bar/widgets/battery';
 import { ModuleSeparator } from '@bar/widgets/ModuleSeparator';
-import { PowerMenu } from '@bar/widgets/PowerMenu';
-import { AudioControl } from '@bar/widgets/sound/AudioControl';
-import { SystemTray } from '@bar/widgets/sys-tray/SystemTray';
+import { PowerMenu } from '@bar/widgets/power-menu';
+import { AudioControl } from '@bar/widgets/sound';
+import { SystemTray } from '@bar/widgets/sys-tray';
 import { Gtk } from 'astal/gtk3';
 
 export function RightModule() {

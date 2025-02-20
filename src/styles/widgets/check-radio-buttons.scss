@@ -42,6 +42,12 @@ radio:indeterminate {
   }
 }
 
+radio:checked,
+radio:indeterminate {
+  color: $primary-container;
+  background-color: $on-primary-container;
+}
+
 check {
   &:checked, &:indeterminate {
     -gtk-icon-source: -gtk-icontheme('kt-check-data-symbolic');

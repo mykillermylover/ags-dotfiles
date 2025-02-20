@@ -20,7 +20,7 @@ export function SysInfo() {
       onHoverLost={() => toggleVisible(false)}
       onClick={() => execKittyAsync('btop')}
     >
-      <box className="sys-info module-item">
+      <box className="sys-info module-item" valign={Gtk.Align.CENTER}>
         <MemoryInfo />
 
         <revealer

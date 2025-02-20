@@ -9,6 +9,7 @@
         "baseUrl": "./src",
         "checkJs": false,
         "experimentalDecorators": true,
+        "incremental": true,
         "jsx": "react-jsx",
         "jsxImportSource": "astal/gtk3",
         "lib": [
@@ -24,8 +25,12 @@
             "@*": [
                 "*"
             ],
-            "astal": ["/usr/share/astal/gjs"],
-            "astal/*": ["/usr/share/astal/gjs/*"]
+            "astal": [
+                "/usr/share/astal/gjs"
+            ],
+            "astal/*": [
+                "/usr/share/astal/gjs/*"
+            ]
         },
         "pretty": true,
         "resolveJsonModule": true,
@@ -34,8 +39,11 @@
         "strictNullChecks": true,
         "target": "ES2022",
         "typeRoots": [
-            "src/lib/types"
+            "@girs"
         ],
         "types": []
-    }
+    },
+    "exclude": [
+        "node_modules"
+    ]
 }

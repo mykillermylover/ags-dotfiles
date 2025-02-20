@@ -1,13 +1,12 @@
 @use '../variables' as *;
 @use 'shared';
+@use 'sass:color';
 
 menu {
   @extend .container;
-  border-radius: $border-radius;
-  border: 1px solid $outline;
 
   menuitem {
-    transition: background-color 75ms steps(10);
+    transition: background-color 50ms steps(24);
     min-height: 20px;
     min-width: 40px;
     padding: $button-padding $double-container-padding;
@@ -15,11 +14,14 @@ menu {
 
     &:hover,
     &:active {
-      background-color: $background;
+      background-color: $surface-tint;
+      >label {
+        color: $surface;
+      }
     }
 
     &:disabled {
-      color: $on-primary;
+      color: $outline;
     }
 
     arrow {
@@ -33,7 +35,6 @@ menu {
   separator {
     min-height: 1px;
     margin: 4px 0;
-    background-color: $background;
   }
 }
 

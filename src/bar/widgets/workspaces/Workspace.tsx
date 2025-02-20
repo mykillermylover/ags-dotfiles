@@ -14,7 +14,7 @@ export function Workspace(props: {
   } = props;
 
   const currentFocused = bind(hyprland, 'focusedWorkspace').as(
-    (focusedWorkspace) => focusedWorkspace.id === workspace.id,
+    (focusedWorkspace) => focusedWorkspace?.id === workspace.id,
   );
 
   currentFocused.subscribe(onFocus);

@@ -1,3 +1,4 @@
+import { idleInhibit } from '@shared/globals';
 import { App, Astal, Gdk } from 'astal/gtk3';
 
 import { CenterModule } from './CenterModule';
@@ -9,6 +10,7 @@ const { TOP, LEFT, RIGHT } = Astal.WindowAnchor;
 export default function Bar(gdkMonitor: Gdk.Monitor) {
   return (
     <window
+      inhibit={idleInhibit()}
       className="Bar"
       gdkmonitor={gdkMonitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}

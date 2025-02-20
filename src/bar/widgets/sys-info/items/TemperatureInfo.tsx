@@ -5,9 +5,9 @@ export function TemperatureInfo() {
   const temperature = TemperatureService.get_default();
 
   return (
-    <label className="GroupItem">
+    <label className="sys-info-item">
       {bind(temperature, 'temperature').as(
-        (value) => ' ' + value.toFixed(0) + '℃',
+        (value) => '' + value.toFixed(0) + '℃',
       )}
     </label>
   );

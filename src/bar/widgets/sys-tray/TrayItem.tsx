@@ -13,9 +13,9 @@ const createMenu = (menuModel: Gio.MenuModel, actionGroup: Gio.ActionGroup) => {
 
 export function TrayItem(props: { item: Tray.TrayItem }) {
   const { item } = props;
-  const tooltipMarkup =
-    item.tooltipMarkup ||
-    (item.title ? item.title[0].toUpperCase() + item.title.slice(1) : '');
+  const tooltipMarkup = bind(item, 'tooltipMarkup').as(
+    (tooltip) => tooltip || item.title,
+  );
 
   const onItemClick = (
     self: Button,

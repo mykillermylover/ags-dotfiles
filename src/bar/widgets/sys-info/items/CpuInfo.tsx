@@ -15,7 +15,7 @@ export function CpuInfo() {
 
   return (
     <label
-      className="GroupItem"
+      className="sys-info-item"
       label={total.as((value) => ` ${value}`)}
       tooltipMarkup={cores}
     />

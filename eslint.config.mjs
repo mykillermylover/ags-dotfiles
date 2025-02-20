@@ -53,6 +53,7 @@ export default tseslint.config([
           checksVoidReturn: false,
         },
       ],
+      '@typescript-eslint/no-floating-promises': 'warn',
     },
     languageOptions: {
       parser: tsParser,

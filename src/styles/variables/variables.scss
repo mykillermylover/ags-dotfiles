@@ -6,6 +6,6 @@ $half-container-padding: 4px;
 $quarter-container-padding: 2px;
 
 $button-padding: $half-container-padding;
-$half-button-padding: calc($button-padding / 2);
+$half-button-padding: $quarter-container-padding;
 
 $border-radius: 8px;

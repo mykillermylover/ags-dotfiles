@@ -7,7 +7,9 @@
 // widgets
 @use 'bar';
 @use 'modules';
-@use 'workspaces';
 @use 'tray';
 @use 'calendar';
 @use 'mediaplayer';
+@use 'workspaces';
+@use 'sys-info';
+@use 'notifications';

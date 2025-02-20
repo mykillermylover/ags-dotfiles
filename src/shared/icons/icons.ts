@@ -24,6 +24,7 @@ export default {
     time: 'hourglass-symbolic',
     toolbars: 'toolbars-symbolic',
     warning: 'dialog-warning-symbolic',
+    minimize: 'window-minimize-symbolic',
     arrow: {
       right: 'pan-end-symbolic',
       left: 'pan-start-symbolic',
@@ -91,8 +92,8 @@ export default {
     recording: 'media-record-symbolic',
   },
   notifications: {
-    noisy: 'org.gnome.Settings-notifications-symbolic',
-    silent: 'notifications-disabled-symbolic',
+    noisy: 'notification-symbolic',
+    silent: 'notification-disabled-symbolic',
     message: 'chat-bubbles-symbolic',
   },
   trash: {
