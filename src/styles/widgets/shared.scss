@@ -18,34 +18,70 @@
 button, .button {
   &.primary {
     background: $primary;
+
     & > * {
       color: $on-primary;
     }
   }
+
   &.reverse-primary {
     background: $on-primary;
     border: $outline 1px solid;
+
     & > * {
       color: $primary;
     }
   }
+
   &.secondary {
     background: $secondary;
+
     & > * {
       color: $on-secondary;
     }
   }
+
   &.reverse-secondary {
     background: $on-secondary;
     border: $outline 1px solid;
+
     & > * {
       color: $secondary;
     }
   }
-  &.primary, &.reverse-primary, &.secondary, &.reverse-secondary {
+
+  &.tertiary {
+    background: $tertiary;
+
+    & > * {
+      color: $on-tertiary;
+    }
+  }
+
+  &.reverse-tertiary {
+    background: $on-tertiary;
+    border: $outline 1px solid;
+
+    & > * {
+      color: $tertiary;
+    }
+  }
+
+  &.disabled {
+    background: color.adjust($on-background, $alpha: -0.5);
+
+    & > * {
+      color: color.adjust($background, $alpha: -0.5);
+    }
+  }
+
+  &.primary, &.reverse-primary,
+  &.secondary, &.reverse-secondary,
+  &.tertiary, &.reverse-tertiary {
     &:hover {
       box-shadow: 0 0 2px 0 color.adjust(black, $alpha: -0.3) inset;
     }
+
     &:active {
       box-shadow: 0 0 4px 0 color.adjust(black, $alpha: -0.3) inset;
     }
@@ -66,6 +102,7 @@ button.txt-icon, label.txt-icon {
   &, label {
     padding-right: 0.4em;
   }
+
   &.idle-inhibitor {
     padding-right: 0.2em;
   }
@@ -158,15 +195,13 @@ scale {
   }
 
   slider:hover {
-    box-shadow:
-            inset 0 0 0 2px $outline,
-            0 0 0 8px color.adjust($outline, $alpha: -0.9);
+    box-shadow: inset 0 0 0 2px $outline,
+    0 0 0 8px color.adjust($outline, $alpha: -0.9);
   }
 
   slider:active {
-    box-shadow:
-            inset 0 0 0 4px $outline,
-            0 0 0 8px color.adjust($outline, $alpha: -0.9);
+    box-shadow: inset 0 0 0 4px $outline,
+    0 0 0 8px color.adjust($outline, $alpha: -0.9);
   }
 }
 
@@ -179,3 +214,23 @@ separator {
     background-color: transparent;
   }
 }
+
+scrollbar contents trough {
+  background: color.adjust($tertiary, $alpha: -0.7);
+  border-radius: $border-radius;
+
+  &:hover {
+    min-width: $container-padding;
+    background: color.adjust($tertiary, $alpha: -0.4);
+  }
+
+  slider {
+    border-radius: $border-radius;
+    min-width: 4px;
+    background: $primary;
+    &:hover {
+      min-width: $button-padding;
+    }
+  }
+}
+

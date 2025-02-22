@@ -1,15 +1,62 @@
 @use '../variables' as *;
 @use "sass:color";
 
+@keyframes blinkIcon {
+  to {
+    -gtk-icon-shadow: $secondary 0 0 4px;
+  }
+}
+
+// notification button in bar
+.notification-button {
+  &.silent {
+  }
+
+  &.message {
+    animation-name: blinkIcon;
+    animation-duration: 1s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+  }
+
+  &.noisy {
+    color: color.adjust($on-background, $alpha: -0.5);
+  }
+}
+
+// Notification popups and panel
 .notification-card * {
   font-family: "MesloLGS Nerd Font", serif;
 }
 
 .notification-card {
-
-  margin: $button-padding $container-padding;
+  margin: $container-padding;
   box-shadow: 2px 0 4px 0 color.adjust(black, $alpha: -0.5);
   border-radius: $border-radius;
+
+  &.panel-notification {
+    box-shadow: unset;
+    background: $secondary;
+    .header * {
+      color: color.adjust($on-secondary, $alpha: -0.4);
+    }
+
+    separator {
+      background-color: $on-secondary;
+    }
+
+    .content {
+      .summary {
+        font-size: 1.2em;
+        color: $on-secondary;
+      }
+
+      .body {
+        color: color.adjust($on-secondary, $alpha: -0.2);
+      }
+    }
+  }
 
   &.critical {
     border: 1px solid $error-container;
@@ -64,13 +111,15 @@
     }
 
     .image {
-      border: 1px solid $outline;
       margin-right: $container-padding;
-      border-radius: 100%;
       min-width: calc($container-padding * 8);
       min-height: calc($container-padding * 8);
       background-size: contain;
       background-position: center;
+    }
+    .icon-image {
+      margin: $button-padding;
+      margin-left: 0;
     }
   }
 
@@ -80,6 +129,43 @@
 
     button {
       margin: 0 $button-padding;
+    }
+  }
+}
+
+.notification-panel {
+  .header {
+    margin: $button-padding $container-padding;
+
+    .header-text {
+      font-weight: bold;
+    }
+
+    .clear-icon {
+      padding: $button-padding calc($button-padding / 1.2) $button-padding $button-padding;
+      margin: 0;
+      background: $error;
+      icon {
+        color: $on-error;
+      }
+    }
+
+    separator {
+      margin-top: $container-padding;
+    }
+  }
+
+  .placeholder {
+    margin: -400px;
+    icon, label {
+      color: color.adjust($on-background, $alpha: -0.5);
+    }
+    icon {
+      font-size: calc($font-size * 4);
+      margin-bottom: calc($container-padding * 2);
+    }
+    label {
+      font-size: calc($font-size * 1.2);
     }
   }
 }

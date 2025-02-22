@@ -1,7 +1,7 @@
 import {
   closeAllPopups,
   globalPopupEventBoxes,
-  hyprland,
+  hyprlandService,
 } from '@shared/globals';
 import { App, Gtk } from 'astal/gtk3';
 
@@ -25,7 +25,7 @@ export function openPopup(clickedWidget: Gtk.Widget, name: string) {
   let marginLeft = btnX + btnWidth / 2 - eventBoxWidth / 2;
   const marginTop = btnY + btnHeight / 2;
 
-  const { width: monitorWidth, scale } = hyprland.focusedMonitor;
+  const { width: monitorWidth, scale } = hyprlandService.focusedMonitor;
 
   const scaledWidth = monitorWidth / scale;
 

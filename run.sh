@@ -1,8 +1,9 @@
 #!/bin/bash
+ags quit -i mshell;
 
 sigint_handler()
 {
-  ags quit
+  ags quit -i mshell
   exit
 }
 
@@ -12,5 +13,5 @@ while true; do
   ags run &
   PID=$!
   inotifywait -e modify -e move -e create -e delete -e attrib -r `pwd`
-  ags quit
+  ags quit -i mshell
 done

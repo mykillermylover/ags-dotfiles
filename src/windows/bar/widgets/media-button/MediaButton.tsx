@@ -1,0 +1,22 @@
+import { openPopup } from '@shared/utils';
+import { Binding } from 'astal';
+import Mpris from 'gi://AstalMpris';
+
+import { getPlayerIcon } from '../mediaplayer/helpers';
+
+interface MediaButtonProps {
+  player: Mpris.Player;
+  tooltip?: Binding<string>;
+}
+
+export function MediaButton({ player, tooltip }: MediaButtonProps) {
+  return (
+    <button
+      cursor="pointer"
+      className="txt-icon module-item"
+      onClick={(self) => openPopup(self, 'mediaplayer')}
+      tooltipMarkup={tooltip}
+      label={getPlayerIcon(player)}
+    />
+  );
+}

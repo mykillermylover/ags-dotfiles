@@ -94,7 +94,7 @@ export default {
   notifications: {
     noisy: 'notification-symbolic',
     silent: 'notification-disabled-symbolic',
-    message: 'chat-bubbles-symbolic',
+    message: 'notification-new-symbolic',
   },
   trash: {
     full: 'user-trash-full-symbolic',

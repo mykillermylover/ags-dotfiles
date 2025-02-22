@@ -17,10 +17,10 @@
         "typescript-eslint": "^8.24.0"
     },
     "main": "app.ts",
-    "name": "astal-shell",
+    "name": "mshell",
     "scripts": {
-        "build": "npm run bundle && chmod +x ./astal-shell && mv -f astal-shell ~/.bin/",
-        "bundle": "ags bundle app.ts astal-shell",
+        "build": "npm run bundle && chmod +x ./mshell && mv -f mshell ~/.bin/",
+        "bundle": "ags bundle app.ts mshell",
         "lint": "eslint --ignore-pattern '@girs/**'",
         "lint-fix": "eslint --ignore-pattern '@girs/**' --fix"
     },

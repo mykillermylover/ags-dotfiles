@@ -15,7 +15,7 @@ menu {
     &:hover,
     &:active {
       background-color: $surface-tint;
-      >label {
+      > label, arrow {
         color: $surface;
       }
     }

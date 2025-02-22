@@ -1,21 +1,21 @@
 #!/usr/bin/gjs -m
-import Bar from '@bar/Bar';
-import { Popups } from '@bar/widgets/popups';
-import { NotificationsPopup } from '@notifications/NotificationsPopup.tsx';
-import { hyprDispatchExec, hyprland } from '@shared/globals';
+import { hyprDispatchExec, hyprlandService } from '@shared/globals';
 import { registerWindows } from '@shared/utils';
+import { WINDOWS } from '@windows';
+import Bar from '@windows/bar/Bar';
 import { App } from 'astal/gtk3';
 
 import style from './style.scss';
 
 App.start({
+  instanceName: 'mshell',
   css: style,
   main() {
     App.get_monitors().map(Bar);
-    registerWindows([...Popups, NotificationsPopup]);
+    registerWindows(WINDOWS);
   },
 });
 
-hyprland.connect('monitor-added', () => {
-  hyprDispatchExec('killall astal-shell; astal-shell');
+hyprlandService.connect('monitor-added', () => {
+  hyprDispatchExec('killall mshell; mshell');
 });

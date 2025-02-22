@@ -1,4 +1,4 @@
-import { sysInfo } from '@bar/config';
+import { sysInfo } from '@windows/bar/config';
 import { Variable } from 'astal';
 import GTop from 'gi://GTop';
 

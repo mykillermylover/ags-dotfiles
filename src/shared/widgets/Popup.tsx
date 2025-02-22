@@ -73,20 +73,9 @@ export function Popup({
             }
           }}
         >
-          <revealer
-            revealChild={false}
-            setup={(self) => {
-              App.connect('window-toggled', (_, window) => {
-                self.set_reveal_child(window.visible);
-              });
-            }}
-            transitionType={Gtk.RevealerTransitionType.SLIDE_UP}
-            transitionDuration={150}
-          >
-            <box canFocus className={'container'} {...props}>
-              {child}
-            </box>
-          </revealer>
+          <box canFocus className={'container'} {...props}>
+            {child}
+          </box>
         </eventbox>
       </eventbox>
     </window>
