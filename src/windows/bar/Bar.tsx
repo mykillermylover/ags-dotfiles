@@ -10,6 +10,8 @@ const { TOP, LEFT, RIGHT } = Astal.WindowAnchor;
 export default function Bar(gdkMonitor: Gdk.Monitor) {
   return (
     <window
+      name="status-bar"
+      namespace="status-bar"
       inhibit={idleInhibit()}
       className="Bar"
       gdkmonitor={gdkMonitor}
