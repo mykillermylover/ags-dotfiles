@@ -1,3 +1,4 @@
+export * from './helpers';
 export * from './mouse';
-export { openPopup } from './popup';
-export { registerWindows } from './register-windows';
+export * from './popup';
+export * from './register-windows';

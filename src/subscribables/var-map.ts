@@ -14,25 +14,26 @@ export class VarMap<K, V = Gtk.Widget> implements Subscribable {
     this.#notify();
   }
 
-  private checkWidget(key: K) {
-    const mapItem = this.#map.get(key);
-    if (mapItem instanceof Gtk.Widget) {
-      mapItem.destroy();
-    }
+  get size() {
+    return this.#map.size;
   }
 
   set(key: K, value: V) {
-    this.checkWidget(key);
-
     this.#map.set(key, value);
     this.#notify();
   }
 
   delete(key: K) {
-    this.checkWidget(key);
-
     this.#map.delete(key);
     this.#notify();
+  }
+
+  getItem(key: K): V | undefined {
+    return this.#map.get(key);
+  }
+
+  getMap(): [K, V][] {
+    return [...this.#map.entries()];
   }
 
   get(): V[] {

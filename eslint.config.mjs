@@ -47,6 +47,7 @@ export default tseslint.config([
       'unicorn/no-array-callback-reference': 'warn',
       'unicorn/no-array-for-each': 'warn',
       'unicorn/prefer-export-from': ['error', { ignoreUsedVariables: true }],
+      'unicorn/no-useless-undefined': ['error', { checkArguments: false }],
       '@typescript-eslint/no-misused-promises': [
         'error',
         {

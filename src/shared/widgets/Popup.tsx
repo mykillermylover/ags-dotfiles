@@ -6,12 +6,14 @@ interface PopupProps {
   name: string;
   child?: JSX.Element | JSX.Element[];
   position?: [x: number, y: number] | [x: number];
+  windowKeyPressHandler?: (key: number) => void;
 }
 
 export function Popup({
   name,
   child,
   position,
+  windowKeyPressHandler,
   ...props
 }: PopupProps & BoxProps) {
   const { TOP, LEFT, RIGHT, BOTTOM } = Astal.WindowAnchor;
@@ -33,6 +35,8 @@ export function Popup({
         if (key === Gdk.KEY_Escape) {
           App.get_window(name)?.set_visible(false);
         }
+
+        windowKeyPressHandler?.(key);
       }}
     >
       <eventbox

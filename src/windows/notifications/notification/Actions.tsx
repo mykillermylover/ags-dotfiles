@@ -18,7 +18,7 @@ export function Actions({
           className={inNotificationPanel ? 'reverse-secondary' : 'secondary'}
           hexpand
           onClicked={() => notification.invoke(id)}
-          label={label}
+          label={label.trim() || 'View'}
         />
       ))}
     </box>
