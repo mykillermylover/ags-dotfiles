@@ -1,8 +1,8 @@
-import { PlayerProps } from '@windows/bar/widgets/mediaplayer/player.props';
 import { icons } from '@shared/icons';
 import { bind, Variable } from 'astal';
 import Mpris from 'gi://AstalMpris';
 
+import { PlayerProps } from '../../player.props';
 import { MediaControlButton } from './MediaControlButton';
 
 export function Loop({ player }: PlayerProps) {

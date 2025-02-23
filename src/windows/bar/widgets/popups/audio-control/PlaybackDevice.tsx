@@ -1,4 +1,4 @@
-import { getScrollDirection, onScroll } from '@shared/utils';
+import { onScroll } from '@shared/utils';
 import { RadioButton, Separator } from '@shared/widgets';
 import { bind } from 'astal';
 import { Gdk, Gtk } from 'astal/gtk3';

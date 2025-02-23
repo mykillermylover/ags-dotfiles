@@ -1,9 +1,10 @@
-import { getIcon } from '@windows/bar/widgets/sound/helpers';
 import { audioService } from '@shared/globals';
 import { getScrollDirection } from '@shared/utils';
 import { openPopup } from '@shared/utils/popup';
 import { bind, Variable } from 'astal';
 import { Astal, Gdk } from 'astal/gtk3';
+
+import { getIcon } from './helpers';
 
 export function AudioControl() {
   const setVolume = (percentage: number, direction: Gdk.ScrollDirection) => {

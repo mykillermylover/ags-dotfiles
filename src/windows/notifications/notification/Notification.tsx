@@ -1,6 +1,7 @@
 import { delay, isRightClick } from '@shared/utils';
 import { Separator } from '@shared/widgets';
 import { Variable } from 'astal';
+import { Revealer } from 'astal/gtk3/widget';
 import AstalNotifd from 'gi://AstalNotifd';
 
 import { NotificationWidget } from '../helpers';
@@ -39,14 +40,13 @@ export function Notification({
     void playAudioFile(soundName);
   }
 
-  const widget = (
-    <revealer
-      onDestroy={() => {
-        visible.drop();
-      }}
-      revealChild={visible()}
-      transitionDuration={TRANSITION_DURATION}
-    >
+  const widget = new Revealer({
+    revealChild: visible(),
+    onDestroy: () => {
+      visible.drop();
+    },
+    transitionDuration: TRANSITION_DURATION,
+    child: (
       <eventbox
         onClick={(_, event) => {
           if (isRightClick(event)) {
@@ -64,10 +64,8 @@ export function Notification({
           />
         </box>
       </eventbox>
-    </revealer>
-  );
-
-  return Object.assign(widget, {
-    hideSelf,
+    ),
   });
+
+  return Object.assign(widget, { hideSelf });
 }
