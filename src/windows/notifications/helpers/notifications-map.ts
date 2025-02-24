@@ -111,7 +111,8 @@ export class NotificationsMap implements Subscribable {
   };
 
   get() {
-    return this.#notifications.get();
+    // it's reversing array in-place, but here it works well
+    return this.#notifications.get().reverse();
   }
 
   getItem(id: number) {

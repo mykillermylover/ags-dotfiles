@@ -150,17 +150,17 @@ scale {
   min-width: 2px;
 
   &.horizontal {
-    padding: 17px 12px;
+    padding: calc($container-padding * 2) calc($container-padding * 1.5);
   }
 
   &.vertical {
-    padding: 12px 17px;
+    padding: calc($container-padding * 1.5) calc($container-padding * 2);
   }
 
   slider {
-    min-height: 18px;
-    min-width: 18px;
-    margin: -8px;
+    min-height: calc($container-padding * 2.2);
+    min-width: calc($container-padding * 2.2);
+    margin: -$container-padding;
   }
 
   trough {

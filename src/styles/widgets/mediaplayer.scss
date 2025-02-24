@@ -46,12 +46,14 @@ $player-border-radius: calc($border-radius * 2);
     font-size: calc($font-size * 1.3);
     color: color.adjust($secondary, $alpha: -0.1);
   }
+
   .name {
     font-weight: bold;
 
     font-size: calc($font-size * 2);
     color: $primary;
   }
+
   .album {
     color: color.adjust($tertiary, $alpha: -0.5);
   }
@@ -92,10 +94,54 @@ $player-border-radius: calc($border-radius * 2);
         color: $tertiary;
         -gtk-icon-shadow: $tertiary 0 0 1.5px;
       }
+
       &.unsupported {
         color: color.adjust($primary, $alpha: -0.95);
         -gtk-icon-shadow: unset;
         -gtk-icon-transform: unset;
+      }
+    }
+  }
+}
+
+.mediaplayer-slider {
+  margin: calc($container-padding * 2) calc($container-padding * 1.5);
+
+  scale {
+    padding: 0;
+
+    contents {
+      trough {
+        background: $outline-variant;
+        border-radius: $border-radius;
+
+        slider {
+          all: unset;
+          min-height: $container-padding;
+          min-width: $container-padding;
+          margin: calc(1px - $container-padding);
+
+          border-radius: 4px;
+          background: $secondary;
+
+          &:hover {
+            background: color.adjust($secondary, $lightness: -5%);
+            box-shadow: 0 0 2px 0 $primary;
+            margin: - $container-padding;
+          }
+
+          transition: margin 50ms steps(25);
+        }
+
+        highlight {
+          padding: calc($container-padding / 2) 0;
+          border-radius: $border-radius;
+          background: $primary-container;
+        }
+      }
+
+      :hover {
+        box-shadow: 0 0 2px -.5px $primary;
       }
     }
   }

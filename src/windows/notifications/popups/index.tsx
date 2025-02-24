@@ -34,7 +34,7 @@ export function NotificationsPopups() {
       {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
       /* @ts-expect-error*/}
       <box vertical noImplicitDestroy>
-        {bind(notifications)}
+        {bind(notifications).as((list) => list.slice(0, 5))}
       </box>
     </window>
   );

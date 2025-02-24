@@ -27,8 +27,9 @@ export function MediaSlider({ player }: PlayerProps) {
   });
 
   return (
-    <box hexpand className="mediaplayer-slider">
+    <box className="mediaplayer-slider">
       <slider
+        cursor="pointer"
         max={length}
         onDestroy={() => {
           sliderDataBinding.drop();
