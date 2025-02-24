@@ -1,6 +1,6 @@
 import { notifdService } from '@shared/globals';
 import { VarMap } from '@subscribables/var-map';
-import { interval, timeout, Variable } from 'astal';
+import { AstalIO, interval, timeout, Variable } from 'astal';
 import { Subscribable } from 'astal/binding';
 import { Window } from 'astal/gtk3/widget';
 import AstalNotifd from 'gi://AstalNotifd';
@@ -17,6 +17,8 @@ interface NotificationsMapProps {
 
 export class NotificationsMap implements Subscribable {
   #notifications: VarMap<number, NotificationWidget>;
+  #timeouts = new VarMap<number, AstalIO.Time>();
+
   private readonly isPanel: boolean;
   private window?: Variable<Window | undefined>;
 
@@ -52,7 +54,7 @@ export class NotificationsMap implements Subscribable {
   }
 
   private addNotification = (_: unknown, id: number) => {
-    const notification = notifdService.get_notification(id);
+    const notification = this.getNotification(id);
     if (
       !this.isPanel &&
       notifdService.dontDisturb &&
@@ -67,7 +69,10 @@ export class NotificationsMap implements Subscribable {
     this.#notifications.set(id, widget);
 
     if (!this.isPanel) {
-      timeout(TIMEOUT, () => this.deleteNotification(_, id));
+      this.#timeouts.set(
+        id,
+        timeout(TIMEOUT, () => this.deleteNotification(_, id)),
+      );
     }
   };
 
@@ -76,7 +81,7 @@ export class NotificationsMap implements Subscribable {
       this.window?.get()?.set_visible(false);
     }
 
-    const widget = this.#notifications.getItem(id);
+    const widget = this.getItem(id);
     if (!widget) {
       return;
     }
@@ -84,6 +89,9 @@ export class NotificationsMap implements Subscribable {
     await widget.hideSelf();
     widget.destroy();
     this.#notifications.delete(id);
+
+    this.#timeouts.getItem(id)?.cancel();
+    this.#timeouts.delete(id);
   };
 
   private getNotification(id: number) {

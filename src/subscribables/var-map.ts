@@ -17,6 +17,9 @@ export class VarMap<K, V = Gtk.Widget> implements Subscribable {
   get size() {
     return this.#map.size;
   }
+  has(key: K): boolean {
+    return this.#map.has(key);
+  }
 
   set(key: K, value: V) {
     this.#map.set(key, value);

@@ -29,6 +29,7 @@ export function MediaSlider({ player }: PlayerProps) {
   return (
     <box className="mediaplayer-slider">
       <slider
+        visible={length.as((l) => l > 0)}
         cursor="pointer"
         max={length}
         onDestroy={() => {
