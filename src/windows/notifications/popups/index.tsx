@@ -1,4 +1,4 @@
-import { hyprlandService } from '@shared/globals';
+import { focusedMonitorId } from '@shared/globals';
 import { bind, Variable } from 'astal';
 import { Astal } from 'astal/gtk3';
 import { Window } from 'astal/gtk3/widget';
@@ -10,7 +10,6 @@ const WINDOW_NAME = 'notification-popup';
 
 export function NotificationsPopups() {
   const window = Variable<Window | undefined>(undefined);
-  const monitor = bind(hyprlandService, 'focusedMonitor').as(({ id }) => id);
 
   const notifications = new NotificationsMap({ window });
 
@@ -26,10 +25,11 @@ export function NotificationsPopups() {
       layer={Astal.Layer.OVERLAY}
       anchor={RIGHT | TOP}
       exclusivity={Astal.Exclusivity.NORMAL}
-      monitor={monitor}
+      monitor={focusedMonitorId}
       setup={(self) => {
         window.set(self);
       }}
+      keymode={Astal.Keymode.NONE}
     >
       {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
       /* @ts-expect-error*/}

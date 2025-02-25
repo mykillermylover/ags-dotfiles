@@ -15,7 +15,7 @@ export function MediaButton({ player, tooltip }: MediaButtonProps) {
       cursor="pointer"
       className="txt-icon module-item"
       onClick={(self) => openPopup(self, 'mediaplayer')}
-      tooltipMarkup={tooltip}
+      tooltipText={tooltip}
       label={getPlayerIcon(player)}
     />
   );

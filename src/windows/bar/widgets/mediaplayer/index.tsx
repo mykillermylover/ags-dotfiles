@@ -1,5 +1,5 @@
-import { MediaPlayerService } from '@connectables';
 import { bind } from 'astal';
+import { MediaPlayerService } from 'shared/connectables';
 
 import { MediaPlayer } from './widgets';
 

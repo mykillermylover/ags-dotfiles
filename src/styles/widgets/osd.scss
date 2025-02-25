@@ -1,0 +1,25 @@
+@use '../variables' as *;
+@use 'sass:color';
+
+.OSD {
+  border-radius: calc($border-radius * 50);
+  background-color: color.adjust($on-secondary, $alpha: -0.1);
+
+  margin: $container-padding $container-padding calc($container-padding * 4);
+  padding: $container-padding;
+
+  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.4);
+
+
+  icon, label {
+    margin: 5px 10px;
+  }
+  icon {
+    font-size: 2em;
+  }
+
+  label {
+    font-size: 1.5em;
+  }
+}
+

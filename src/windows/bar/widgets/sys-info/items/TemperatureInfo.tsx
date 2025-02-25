@@ -1,4 +1,4 @@
-import { TemperatureService } from '@connectables';
+import { TemperatureService } from '@shared/connectables';
 import { bind } from 'astal';
 
 export function TemperatureInfo() {

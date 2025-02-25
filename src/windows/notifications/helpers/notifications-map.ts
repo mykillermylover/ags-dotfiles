@@ -1,5 +1,5 @@
 import { notifdService } from '@shared/globals';
-import { VarMap } from '@subscribables/var-map';
+import { VarMap } from '@shared/subscribables';
 import { AstalIO, interval, timeout, Variable } from 'astal';
 import { Subscribable } from 'astal/binding';
 import { Window } from 'astal/gtk3/widget';

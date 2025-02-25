@@ -1,4 +1,4 @@
-import { MediaPlayerService } from '@connectables';
+import { MediaPlayerService } from 'shared/connectables';
 import { bind } from 'astal';
 
 import { ModuleSeparator } from '../ModuleSeparator';
