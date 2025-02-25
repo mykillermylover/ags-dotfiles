@@ -4,14 +4,12 @@ import { BoxProps } from 'astal/gtk3/widget';
 
 interface PopupProps {
   name: string;
-  child?: JSX.Element | JSX.Element[];
   position?: [x: number, y: number] | [x: number];
   windowKeyPressHandler?: (key: number) => void;
 }
 
 export function Popup({
   name,
-  child,
   position,
   windowKeyPressHandler,
   ...props
@@ -77,9 +75,14 @@ export function Popup({
             }
           }}
         >
-          <box canFocus className={'container'} {...props}>
-            {child}
-          </box>
+          <box
+            setup={(self) => {
+              // To avoid conflicts with user classes
+              self.toggleClassName('container');
+            }}
+            canFocus
+            {...props}
+          />
         </eventbox>
       </eventbox>
     </window>

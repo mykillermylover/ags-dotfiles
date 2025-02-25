@@ -1,5 +1,5 @@
 import { notifdService } from '@shared/globals';
-import { CenterTopPopup } from '@shared/widgets/CenterTopPopup';
+import { CenterTopPopup } from '@shared/widgets/popups/CenterTopPopup';
 import { bind } from 'astal';
 
 import { NotificationsMap } from '../helpers/notifications-map';

@@ -149,59 +149,45 @@ scale {
   min-height: 2px;
   min-width: 2px;
 
-  &.horizontal {
-    padding: calc($container-padding * 2) calc($container-padding * 1.5);
-  }
-
-  &.vertical {
-    padding: calc($container-padding * 1.5) calc($container-padding * 2);
-  }
-
   slider {
-    min-height: calc($container-padding * 2.2);
-    min-width: calc($container-padding * 2.2);
-    margin: -$container-padding;
+    min-height: $container-padding;
+    min-width: $container-padding;
+    margin: calc(1px - $container-padding);
+    border-radius: 4px;
+    background: $tertiary;
+
+    &:hover {
+      background: color.adjust($tertiary, $lightness: -5%);
+      box-shadow: 0 0 2px 0 $secondary;
+    }
+
+    &:active {
+      box-shadow: 0 0 2px 1px $secondary;
+    }
+    transition: margin 50ms steps(25);
   }
 
   trough {
-    transition: background-color 75ms cubic-bezier(0, 0, 0.2, 1);
-    outline: none;
-    background-color: $surface-container-highest
+    background: $outline-variant;
+    border-radius: $border-radius;
   }
 
   highlight {
-    transition: background-color 75ms cubic-bezier(0, 0, 0.2, 1);
-    background-color: $primary;
-  }
+    padding: calc($container-padding / 2) 0;
+    border-radius: $border-radius;
+    background: $primary-container;
 
-  highlight:disabled {
-    background-color: $outline;
+    &:disabled {
+      background-color: $outline;
+    }
   }
 
   fill {
     transition: background-color 75ms cubic-bezier(0, 0, 0.2, 1);
-  }
 
-  fill:disabled {
-    background-color: transparent;
-  }
-
-  slider {
-    transition: all 75ms cubic-bezier(0, 0, 0.2, 1);
-    border-radius: 100%;
-    color: $on-primary-container;
-    background-color: $primary-container;
-    box-shadow: inset 0 0 0 2px $surface;
-  }
-
-  slider:hover {
-    box-shadow: inset 0 0 0 2px $outline,
-    0 0 0 8px color.adjust($outline, $alpha: -0.9);
-  }
-
-  slider:active {
-    box-shadow: inset 0 0 0 4px $outline,
-    0 0 0 8px color.adjust($outline, $alpha: -0.9);
+    &:disabled {
+      background-color: transparent;
+    }
   }
 }
 

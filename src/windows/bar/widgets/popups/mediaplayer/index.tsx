@@ -14,7 +14,7 @@ export function MediaPlayerPopup() {
     <Popup
       position={[CENTER]}
       name={'mediaplayer'}
-      className="container mediaplayer-popup"
+      className="mediaplayer-popup"
       windowKeyPressHandler={(key) => {
         if (key === Gdk.KEY_space) {
           player.get()?.play_pause();

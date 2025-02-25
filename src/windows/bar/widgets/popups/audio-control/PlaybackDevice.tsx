@@ -1,67 +1,58 @@
-import { onScroll } from '@shared/utils';
-import { RadioButton, Separator } from '@shared/widgets';
+import { icons } from '@shared/icons';
 import { bind } from 'astal';
-import { Gdk, Gtk } from 'astal/gtk3';
+import { Gtk } from 'astal/gtk3';
 import Wp from 'gi://AstalWp';
+import AstalWp from 'gi://AstalWp';
 
 interface PlaybackDeviceProps {
   device: Wp.Endpoint;
-  radioButtonGroup: Gtk.RadioButton;
 }
 
-export function PlaybackDevice({
-  device,
-  radioButtonGroup,
-}: PlaybackDeviceProps) {
+export function PlaybackDevice({ device }: PlaybackDeviceProps) {
+  const { AUDIO_MICROPHONE, AUDIO_SPEAKER } = AstalWp.MediaClass;
+  const [speaker, mic, defaultIcon] = [
+    icons.audio.type.speaker,
+    icons.audio.mic.high,
+    icons.audio.type.card,
+  ];
+
+  const className = bind(device, 'isDefault').as((v) =>
+    v ? 'device default' : 'device',
+  );
+
+  let icon: string;
+  switch (device.mediaClass) {
+    case AUDIO_MICROPHONE: {
+      icon = mic;
+      break;
+    }
+    case AUDIO_SPEAKER: {
+      icon = speaker;
+      break;
+    }
+    default: {
+      icon = defaultIcon;
+    }
+  }
+
   return (
-    <box vertical>
-      <box css="margin: 0 8px;">
-        <RadioButton
-          cursor="pointer"
-          active={bind(device, 'isDefault')}
-          onButtonPressEvent={(self) => {
-            if (self.active) {
-              return true;
-            }
-            device.set_is_default(true);
-            if (!device.isDefault) return true;
-          }}
-          group={radioButtonGroup}
-          hexpand
+    <eventbox
+      className={className}
+      cursor="pointer"
+      onClick={() => device.set_is_default(true)}
+      hexpand
+      halign={Gtk.Align.FILL}
+    >
+      <box>
+        <icon icon={icon} />
+        <label
+          label={device.name || device.description}
+          tooltipMarkup={device.name || device.description}
           halign={Gtk.Align.START}
-        >
-          <label halign={Gtk.Align.START} maxWidthChars={40} lines={2} truncate>
-            {device.name || device.description}
-          </label>
-        </RadioButton>
-
-        <Separator transparent hexpand widthRequest={16} />
-
-        <eventbox
-          onClick={() => {
-            device.mute = !device.mute;
-          }}
-        >
-          <icon icon={bind(device, 'volumeIcon')} />
-        </eventbox>
+          maxWidthChars={38}
+          truncate
+        />
       </box>
-
-      <slider
-        max={1.5}
-        setup={(self) => {
-          self.connect('scroll-event', (_, event: Gdk.Event) => {
-            onScroll(event, {
-              onScrollUp: () => (device.volume += 0.05),
-              onScrollDown: () => (device.volume -= 0.05),
-            });
-          });
-        }}
-        value={bind(device, 'volume')}
-        onDragged={(self) => {
-          device.volume = self.value;
-          device.mute = false;
-        }}
-      />
-    </box>
+    </eventbox>
   );
 }
