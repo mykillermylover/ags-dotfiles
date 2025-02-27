@@ -1,6 +1,8 @@
 import { globalPopupEventBoxes } from '@shared/globals';
 import { App, Astal, Gdk, Gtk } from 'astal/gtk3';
-import { BoxProps } from 'astal/gtk3/widget';
+import { BoxProps, EventBox } from 'astal/gtk3/widget';
+
+import { PopupHelpers } from './helpers';
 
 interface PopupProps {
   name: string;
@@ -17,6 +19,21 @@ export function Popup({
   const { TOP, LEFT, RIGHT, BOTTOM } = Astal.WindowAnchor;
   const [hAlign, vAlign] = position ?? [];
 
+  const { hide, hideOnClick, ignoreOnCLick } = new PopupHelpers(name);
+
+  const eventBoxSetup = (self: EventBox) => {
+    globalPopupEventBoxes.set({
+      ...globalPopupEventBoxes.get(),
+      [name]: self,
+    });
+    if (Number.isInteger(vAlign)) {
+      self.toggleClassName('valign');
+    }
+    if (Number.isInteger(hAlign)) {
+      self.toggleClassName('halign');
+    }
+  };
+
   return (
     <window
       name={name}
@@ -31,56 +48,24 @@ export function Popup({
         const key = event.get_keyval()[1];
 
         if (key === Gdk.KEY_Escape) {
-          App.get_window(name)?.set_visible(false);
+          hide();
         }
 
         windowKeyPressHandler?.(key);
       }}
     >
-      <eventbox
-        onButtonPressEvent={(_, event) => {
-          const buttonClicked = event.get_button()[1];
-
-          if (
-            buttonClicked === Gdk.BUTTON_PRIMARY ||
-            buttonClicked === Gdk.BUTTON_SECONDARY
-          ) {
-            App.get_window(name)?.set_visible(false);
-          }
-        }}
-      >
+      <eventbox onButtonPressEvent={hideOnClick}>
         <eventbox
           halign={hAlign ?? Gtk.Align.START}
           valign={vAlign ?? Gtk.Align.START}
-          setup={(self) => {
-            globalPopupEventBoxes.set({
-              ...globalPopupEventBoxes.get(),
-              [name]: self,
-            });
-            if (Number.isInteger(vAlign)) {
-              self.toggleClassName('valign');
-            }
-            if (Number.isInteger(hAlign)) {
-              self.toggleClassName('halign');
-            }
-          }}
-          onButtonPressEvent={(_, event) => {
-            const buttonClicked = event.get_button()[1];
-
-            if (
-              buttonClicked === Gdk.BUTTON_PRIMARY ||
-              buttonClicked === Gdk.BUTTON_SECONDARY
-            ) {
-              return true;
-            }
-          }}
+          setup={eventBoxSetup}
+          onButtonPressEvent={ignoreOnCLick}
         >
           <box
             setup={(self) => {
               // To avoid conflicts with user classes
               self.toggleClassName('container');
             }}
-            canFocus
             {...props}
           />
         </eventbox>

@@ -26,10 +26,18 @@ export default {
     warning: 'dialog-warning-symbolic',
     minimize: 'window-minimize-symbolic',
     arrow: {
-      right: 'pan-end-symbolic',
-      left: 'pan-start-symbolic',
-      down: 'pan-down-symbolic',
-      up: 'pan-up-symbolic',
+      pan: {
+        right: 'pan-end-symbolic',
+        left: 'pan-start-symbolic',
+        down: 'pan-down-symbolic',
+        up: 'pan-up-symbolic',
+      },
+      draw: {
+        right: 'draw-arrow-forward-symbolic',
+        left: 'draw-arrow-back-symbolic',
+        down: 'draw-arrow-down-symbolic',
+        up: 'draw-arrow-up-symbolic',
+      },
     },
   },
   audio: {

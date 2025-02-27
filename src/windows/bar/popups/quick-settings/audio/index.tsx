@@ -1,12 +1,11 @@
 import { audioService } from '@shared/globals';
-import { Popup } from '@shared/widgets';
 import { bind } from 'astal';
 
 import { DevicesDrawer } from './DevicesDrawer';
 
-export function AudioControlPopup() {
+export function AudioControl() {
   return (
-    <Popup name="audio-control" vertical className="audio-control">
+    <box vertical className="audio-control">
       <DevicesDrawer
         defaultDevice={audioService.defaultSpeaker}
         devices={bind(audioService, 'speakers')}
@@ -16,6 +15,6 @@ export function AudioControlPopup() {
         defaultDevice={audioService.defaultMicrophone}
         devices={bind(audioService, 'microphones')}
       />
-    </Popup>
+    </box>
   );
 }

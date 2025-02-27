@@ -17,7 +17,7 @@ export function DevicesDrawer({ defaultDevice, devices }: Props) {
   };
 
   App.connect('window-toggled', (_, window) => {
-    if (window.name === 'audio-control' && !window.visible) {
+    if (window.name === 'quick-settings' && !window.visible) {
       arrowState.set(false);
     }
   });

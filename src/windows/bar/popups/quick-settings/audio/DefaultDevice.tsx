@@ -1,3 +1,4 @@
+import { icons } from '@shared/icons';
 import { onScroll } from '@shared/utils';
 import { bind, Binding, Variable } from 'astal';
 import { Gdk, Gtk } from 'astal/gtk3';
@@ -60,7 +61,7 @@ export function DefaultDevice({
         cursor="pointer"
         halign={Gtk.Align.END}
       >
-        <icon className={iconClass} icon={'draw-arrow-forward-symbolic'} />
+        <icon className={iconClass} icon={icons.ui.arrow.draw.right} />
       </eventbox>
     </box>
   );

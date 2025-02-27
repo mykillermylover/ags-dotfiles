@@ -39,7 +39,7 @@ export function AudioControl() {
       className="module-item"
       cursor="pointer"
       onScroll={onScroll}
-      onClick={(self) => openPopup(self, 'audio-control')}
+      onClick={(self) => openPopup(self, 'quick-settings')}
       onDestroy={() => {
         label.drop();
       }}

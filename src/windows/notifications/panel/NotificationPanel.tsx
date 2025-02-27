@@ -1,5 +1,6 @@
 import { notifdService } from '@shared/globals';
-import { CenterTopPopup } from '@shared/widgets/popups/CenterTopPopup';
+import { AnchoredPopup } from '@shared/widgets/popups/anchored-popup';
+import { CHILD_POSITION } from '@shared/widgets/popups/anchored-popup/interfaces';
 import { bind } from 'astal';
 
 import { NotificationsMap } from '../helpers/notifications-map';
@@ -16,7 +17,10 @@ export function NotificationPanel() {
   };
 
   return (
-    <CenterTopPopup name={'notification-panel'}>
+    <AnchoredPopup
+      position={CHILD_POSITION.TOP_CENTER}
+      name={'notification-panel'}
+    >
       <box widthRequest={400} vertical className="notification-panel">
         <NotificationPanelHeader
           onDNDClick={toggleDND}
@@ -33,6 +37,6 @@ export function NotificationPanel() {
           </box>
         </scrollable>
       </box>
-    </CenterTopPopup>
+    </AnchoredPopup>
   );
 }

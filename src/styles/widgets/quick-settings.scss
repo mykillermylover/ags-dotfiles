@@ -1,0 +1,144 @@
+@use '../variables' as *;
+@use 'sass:color';
+
+$bg: $primary;
+$fg: $on-primary;
+
+$arrow-button-border-radius: $border-radius * 1.5;
+
+.quick-settings {
+  /* ### ARROW BUTTON ### */
+  .arrow-button {
+    margin: $container-padding;
+    background: $bg;
+
+    border-radius: $arrow-button-border-radius;
+
+    label, icon {
+      color: $fg;
+    }
+
+    .main {
+      padding: $container-padding $button-padding $container-padding $container-padding;
+
+      border-radius: $arrow-button-border-radius 0 0 $arrow-button-border-radius;
+    }
+
+    .main-icon {
+      font-size: $font-size * 2;
+      padding-right: $container-padding;
+    }
+
+    .arrow-icon {
+      font-size: $font-size * 1.2;
+      padding: 0 $container-padding 0 $button-padding;
+
+      border-radius: 0 $arrow-button-border-radius $arrow-button-border-radius 0;
+    }
+
+    eventbox:hover {
+      .main, .arrow-icon {
+        background: $tertiary;
+
+        label, icon {
+          color: $on-tertiary;
+        }
+      }
+
+      .main {
+        padding-right: calc($button-padding - 1px);
+        border-right: $on-tertiary 1px solid;
+      }
+      .arrow-icon {
+        padding-left: calc($button-padding - 1px);
+        border-left: $on-tertiary 1px solid;
+      }
+    }
+  }
+
+  scrollable {
+
+    overshoot.top {
+      background: linear-gradient(rgba(0, 0, 0, 0.3) 0%, transparent 25%);
+    }
+
+    overshoot.bottom {
+      background: linear-gradient(transparent 75%, rgba(0, 0, 0, 0.3) 100%);
+    }
+  }
+
+  /* ### AUDIO CONTROL ### */
+  .audio-control {
+    .devices-drawer {
+      margin: $button-padding 0;
+      transition: all 50ms steps(25);
+
+      border-radius: calc($border-radius * 2);
+
+      &.active {
+        background: $bg;
+
+        icon, label {
+          color: $fg;
+        }
+
+        scale slider {
+          background: $tertiary-container;
+
+          &:hover {
+            background: color.adjust($tertiary-container, $lightness: 5%);
+          }
+        }
+      }
+    }
+
+    .default-device {
+      margin: $container-padding;
+
+      icon {
+        padding: $button-padding;
+      }
+
+      .arrow icon {
+        transition: all 100ms steps(25);
+
+        &.active {
+          -gtk-icon-transform: rotate(90deg);
+        }
+      }
+    }
+
+    .devices-list-container {
+      padding: 0 $button-padding $container-padding;
+    }
+
+    .devices-list eventbox.device {
+      box {
+        padding: $button-padding $container-padding;
+        border-radius: $button-padding;
+
+        label {
+          margin-left: $container-padding;
+        }
+      }
+
+      &.default box {
+        background: $on-tertiary;
+
+        label, icon {
+          color: $tertiary;
+        }
+      }
+
+      &:hover:not(.default) box {
+        background: $tertiary;
+        padding: calc($button-padding - 1px) calc($container-padding - 1px);
+        border: $tertiary-container 1px solid;
+
+        label, icon {
+          color: $on-tertiary;
+        }
+      }
+    }
+  }
+}
