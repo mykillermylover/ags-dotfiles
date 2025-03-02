@@ -60,12 +60,10 @@ $player-border-radius: calc($border-radius * 2);
 }
 
 .song-controls {
-  padding: 0 calc($container-padding * 20);
+  padding: 0 calc($container-padding * 15);
 
   .song-controls-item {
-    margin: 0 8px;
-    border-radius: $border-radius;
-    padding: $button-padding $container-padding;
+    margin: 0 $container-padding;
 
     icon {
       font-size: calc($font-size * 2);
@@ -105,6 +103,7 @@ $player-border-radius: calc($border-radius * 2);
 }
 
 .mediaplayer-slider {
+  min-width: calc($container-padding * 45);
   margin: calc($container-padding * 2) calc($container-padding * 1.5);
 
   scale contents trough:hover {

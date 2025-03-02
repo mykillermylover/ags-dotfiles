@@ -10,21 +10,10 @@ interface PlaybackDevicesProps {
 
 export function Devices({ devices }: PlaybackDevicesProps) {
   return (
-    <>
+    <box className="devices-list" vertical spacing={2}>
       {devices.as((devices) => {
-        return (
-          <box
-            className="devices-list"
-            halign={Gtk.Align.FILL}
-            vertical
-            spacing={2}
-          >
-            {devices.map((device) => (
-              <PlaybackDevice device={device} />
-            ))}
-          </box>
-        );
+        return devices.map((device) => <PlaybackDevice device={device} />);
       })}
-    </>
+    </box>
   );
 }

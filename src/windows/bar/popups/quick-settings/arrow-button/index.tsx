@@ -6,6 +6,7 @@ interface Props {
   icon: string | Binding<string>;
   title: string | Binding<string>;
   subtitle: string | Binding<string>;
+  className?: Binding<string>;
 
   onButtonClick?: () => void;
   onArrowClick?: () => void;
@@ -14,12 +15,13 @@ interface Props {
 export function ArrowButton({
   icon,
   title,
+  className,
   onArrowClick,
   onButtonClick,
   subtitle,
 }: Props) {
   return (
-    <box className="arrow-button">
+    <box className={className?.as((className) => `arrow-button ${className}`)}>
       <eventbox onClick={onButtonClick} cursor="pointer" hexpand>
         <box className="main">
           <icon halign={Gtk.Align.START} className="main-icon" icon={icon} />

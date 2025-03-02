@@ -1,0 +1,73 @@
+@use '../../variables' as *;
+
+$arrow-button-border-radius: $border-radius * 1.5;
+
+.quick-settings .arrow-button {
+  transition: all 100ms steps(10);
+  margin: $container-padding;
+  background: $primary;
+
+  border-radius: $arrow-button-border-radius;
+
+  label, icon {
+    color: $on-primary;
+  }
+
+  .main {
+    padding: $container-padding $button-padding $container-padding $container-padding;
+
+    border-radius: $arrow-button-border-radius 0 0 $arrow-button-border-radius;
+  }
+
+  .main-icon {
+    font-size: $font-size * 2;
+    padding-right: $container-padding;
+  }
+
+  .arrow-icon {
+    font-size: $font-size * 1.2;
+    padding: 0 $container-padding 0 $button-padding;
+
+    border-radius: 0 $arrow-button-border-radius $arrow-button-border-radius 0;
+
+    transition: all 100ms steps(25);
+
+    &.active {
+      -gtk-icon-transform: rotate(90deg);
+    }
+  }
+
+  eventbox {
+    .main, .arrow-icon {
+      transition: all 100ms steps(10);
+    }
+
+    &:hover {
+      .main, .arrow-icon {
+        background: $tertiary;
+
+        label, icon {
+          color: $on-tertiary;
+        }
+      }
+
+      .main {
+        padding-right: calc($button-padding - 1px);
+        border-right: $on-tertiary 1px solid;
+      }
+      .arrow-icon {
+        padding-left: calc($button-padding - 1px);
+        border-left: $on-tertiary 1px solid;
+      }
+    }
+  }
+
+  &.active {
+    margin-bottom: 0;
+    border-bottom: $inverse-primary 1px solid;
+    padding-bottom: calc($button-padding - 1px);
+
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}

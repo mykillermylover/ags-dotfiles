@@ -1,0 +1,50 @@
+@use '../../variables' as *;
+@use 'sass:color';
+
+.quick-settings .audio-control {
+  .devices-drawer {
+    margin: $button-padding 0;
+    transition: all 100ms steps(25);
+
+    border-radius: calc($border-radius * 2);
+
+    &.active {
+      margin: $button-padding $container-padding;
+      background: $primary;
+
+      .default-device {
+        icon, label {
+          color: $on-primary;
+        }
+      }
+
+      scale slider {
+        background: $tertiary-container;
+
+        &:hover {
+          background: color.adjust($tertiary-container, $lightness: 5%);
+        }
+      }
+    }
+  }
+
+  .default-device {
+    margin: $container-padding;
+
+    icon {
+      padding: $button-padding;
+    }
+
+    .arrow icon {
+      transition: all 100ms steps(25);
+
+      &.active {
+        -gtk-icon-transform: rotate(90deg);
+      }
+    }
+  }
+
+  .devices-list-container {
+    padding: 0 $button-padding $container-padding;
+  }
+}

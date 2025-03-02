@@ -1,0 +1,44 @@
+@use '../../variables' as *;
+
+.quick-settings scrollable {
+
+  overshoot.top {
+    background: linear-gradient(rgba(0, 0, 0, 0.3) 0%, transparent 25%);
+  }
+
+  overshoot.bottom {
+    background: linear-gradient(transparent 75%, rgba(0, 0, 0, 0.3) 100%);
+  }
+}
+
+.quick-settings .qs-list-item {
+  transition: all 50ms steps(25);
+  padding: $button-padding $container-padding;
+  border-radius: $button-padding;
+
+  label {
+    margin-left: $container-padding;
+  }
+
+  label, icon {
+    color: $on-primary;
+  }
+
+  &.active {
+    background: $on-tertiary;
+
+    label, icon {
+      color: $tertiary;
+    }
+  }
+
+  &:hover:not(.active) {
+    background: $tertiary;
+    padding: calc($button-padding - 1px) calc($container-padding - 1px);
+    border: $tertiary-container 1px solid;
+
+    label, icon {
+      color: $on-tertiary;
+    }
+  }
+}

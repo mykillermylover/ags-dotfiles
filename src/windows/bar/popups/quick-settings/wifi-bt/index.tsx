@@ -1,5 +1,6 @@
 import { networkService } from '@shared/globals';
 import { Variable } from 'astal';
+import { App } from 'astal/gtk3';
 
 import { WifiBTButton } from './WifiBTButton';
 import { WifiBTMenu } from './WifiBTMenu';
@@ -27,13 +28,38 @@ export function WifiBT() {
     currentPage.set(name);
   };
 
+  App.connect('window-toggled', (_, window) => {
+    if (window.name === 'quick-settings' && !window.visible) {
+      revealChild.set(false);
+    }
+  });
+
+  const activePage = Variable.derive(
+    [currentPage(), revealChild()],
+    (currentPage, revealChild) => {
+      if (!revealChild) {
+        return;
+      }
+
+      return currentPage;
+    },
+  );
+
+  const onDestroy = () => {
+    currentPage.drop();
+    revealChild.drop();
+    activePage.drop();
+  };
+
   return (
-    <>
+    <box onDestroy={onDestroy} vertical className="wifi-bt">
       <WifiBTButton
+        activePage={activePage()}
         wifiOnArrowClick={arrowHandler('wifi')}
         bluetoothOnArrowClick={arrowHandler('bluetooth')}
       />
+
       <WifiBTMenu revealChild={revealChild()} currentPage={currentPage()} />
-    </>
+    </box>
   );
 }

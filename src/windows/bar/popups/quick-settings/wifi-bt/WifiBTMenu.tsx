@@ -1,41 +1,45 @@
-import { networkService } from '@shared/globals';
-import { bind, Binding } from 'astal';
+import { Binding, Variable } from 'astal';
 import { Gtk } from 'astal/gtk3';
 
+import { WifiPage } from './pages/Wifi';
+
 interface Props {
-  currentPage: string | Binding<string>;
-  revealChild: boolean | Binding<boolean>;
+  currentPage: Binding<string>;
+  revealChild: Binding<boolean>;
 }
 
 export function WifiBTMenu({ currentPage, revealChild }: Props) {
-  const wifi = networkService.wifi;
+  const className = Variable.derive(
+    [currentPage, revealChild],
+    (currentPage, revealChild) => {
+      const defaultName = 'wifi-bt-stack';
+      if (!revealChild) {
+        return defaultName;
+      }
+
+      return `${defaultName} ${currentPage}`;
+    },
+  );
 
   return (
-    <revealer revealChild={revealChild}>
-      <stack
-        visibleChildName={currentPage}
-        transitionType={Gtk.StackTransitionType.SLIDE_LEFT_RIGHT}
-      >
-        <scrollable name="wifi" heightRequest={120}>
-          <box vertical>
-            {bind(wifi, 'accessPoints').as((accessPoints) =>
-              accessPoints.map((accessPoint) => (
-                <box>
-                  <icon icon={accessPoint.iconName} />
-                  <label>{accessPoint.ssid}</label>
+    <revealer
+      onDestroy={() => {
+        className.drop();
+      }}
+      revealChild={revealChild}
+    >
+      <box className={className()}>
+        <stack
+          visibleChildName={currentPage}
+          transitionType={Gtk.StackTransitionType.SLIDE_LEFT_RIGHT}
+        >
+          <WifiPage />
 
-                  <label hexpand xalign={1}>
-                    {`${(accessPoint.frequency / 1000).toFixed(1)} GHz`}
-                  </label>
-                </box>
-              )),
-            )}
+          <box name="bluetooth">
+            <label>BLUETOOTH</label>
           </box>
-        </scrollable>
-        <box name="bluetooth">
-          <label>BLUETOOTH</label>
-        </box>
-      </stack>
+        </stack>
+      </box>
     </revealer>
   );
 }

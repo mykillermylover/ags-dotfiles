@@ -17,7 +17,7 @@ export function NotificationPanelHeader({ onDeleteClick, onDNDClick }: Props) {
   );
 
   return (
-    <box vertical className="header">
+    <box vertical className="panel-header">
       <box hexpand>
         <button
           halign={Gtk.Align.START}

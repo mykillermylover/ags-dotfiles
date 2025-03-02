@@ -1,0 +1,30 @@
+@use '../../variables' as *;
+
+.quick-settings .wifi-bt {
+
+  .wifi-bt-stack {
+    transition: border-radius 100ms steps(10);
+
+    border-radius: $border-radius;
+    background: $primary;
+    margin: 0 $container-padding;
+
+    &.wifi {
+      border-top-left-radius: 0;
+    }
+    &.bluetooth {
+      border-top-right-radius: 0;
+    }
+  }
+
+  .arrow-button {
+    margin-bottom: $button-padding;
+  }
+
+  .wifi-list-scrollable {
+
+    .wifi-list {
+      padding: $button-padding;
+    }
+  }
+}

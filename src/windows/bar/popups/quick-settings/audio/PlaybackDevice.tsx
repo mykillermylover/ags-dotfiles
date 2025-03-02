@@ -16,9 +16,10 @@ export function PlaybackDevice({ device }: PlaybackDeviceProps) {
     icons.audio.type.card,
   ];
 
-  const className = bind(device, 'isDefault').as((v) =>
-    v ? 'device default' : 'device',
-  );
+  const className = bind(device, 'isDefault').as((isDefault) => {
+    const className = 'qs-list-item';
+    return isDefault ? `${className} active` : className;
+  });
 
   let icon: string;
   switch (device.mediaClass) {
@@ -36,7 +37,7 @@ export function PlaybackDevice({ device }: PlaybackDeviceProps) {
   }
 
   return (
-    <eventbox
+    <button
       className={className}
       cursor="pointer"
       onClick={() => device.set_is_default(true)}
@@ -49,10 +50,10 @@ export function PlaybackDevice({ device }: PlaybackDeviceProps) {
           label={device.name || device.description}
           tooltipMarkup={device.name || device.description}
           halign={Gtk.Align.START}
-          maxWidthChars={38}
+          maxWidthChars={40}
           truncate
         />
       </box>
-    </eventbox>
+    </button>
   );
 }
