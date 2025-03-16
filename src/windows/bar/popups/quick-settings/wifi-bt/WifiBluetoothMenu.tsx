@@ -1,7 +1,7 @@
 import { Binding, Variable } from 'astal';
 import { Gtk } from 'astal/gtk3';
 
-import { BluetoothPage } from './pages/Bluetooth';
+import { BluetoothPage } from './pages/bluetooth';
 import { WifiPage } from './pages/Wifi';
 
 interface Props {
@@ -31,6 +31,7 @@ export function WifiBTMenu({ currentPage, revealChild }: Props) {
     >
       <box className={className()}>
         <stack
+          heightRequest={320}
           visibleChildName={currentPage}
           transitionType={Gtk.StackTransitionType.SLIDE_LEFT_RIGHT}
         >

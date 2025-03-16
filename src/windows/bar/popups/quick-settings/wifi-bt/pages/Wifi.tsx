@@ -35,11 +35,7 @@ export function WifiPage() {
   };
 
   return (
-    <scrollable
-      className="wifi-list-scrollable"
-      name="wifi"
-      heightRequest={160}
-    >
+    <scrollable className="wifi-list-scrollable" name="wifi">
       <box vertical className="wifi-list" spacing={2}>
         {bind(wifi, 'accessPoints').as((accessPoints) =>
           accessPoints

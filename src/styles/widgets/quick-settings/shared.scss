@@ -11,34 +11,40 @@
   }
 }
 
-.quick-settings .qs-list-item {
-  transition: all 50ms steps(25);
-  padding: $button-padding $container-padding;
-  border-radius: $button-padding;
-
-  label {
-    margin-left: $container-padding;
-  }
-
-  label, icon {
+.quick-settings {
+  label.qs-list-label, icon.qs-list-icon {
     color: $on-primary;
   }
 
-  &.active {
-    background: $on-tertiary;
+  .qs-list-item {
+    transition: all 50ms steps(25);
+    padding: $button-padding $container-padding;
+    border-radius: $button-padding;
 
-    label, icon {
-      color: $tertiary;
+    label {
+      margin-left: $container-padding;
     }
-  }
-
-  &:hover:not(.active) {
-    background: $tertiary;
-    padding: calc($button-padding - 1px) calc($container-padding - 1px);
-    border: $tertiary-container 1px solid;
 
     label, icon {
-      color: $on-tertiary;
+      color: $on-primary;
+    }
+
+    &.active {
+      background: $on-tertiary;
+
+      label, icon {
+        color: $tertiary;
+      }
+    }
+
+    &:hover:not(.active) {
+      background: $tertiary;
+      padding: calc($button-padding - 1px) calc($container-padding - 1px);
+      border: $tertiary-container 1px solid;
+
+      label, icon {
+        color: $on-tertiary;
+      }
     }
   }
 }

@@ -1,46 +1,38 @@
-const batteryIcons: Record<number, string> = {
-  0: '󰂎',
-  10: '󰁺',
-  20: '󰁻',
-  30: '󰁼',
-  40: '󰁽',
-  50: '󰁾',
-  60: '󰁿',
-  70: '󰂀',
-  80: '󰂁',
-  90: '󰂂',
-  100: '󰁹',
-};
+import { icons } from '@shared/icons';
 
-const batteryIconsCharging: Record<number, string> = {
-  0: '󰢟',
-  10: '󰢜',
-  20: '󰂆',
-  30: '󰂇',
-  40: '󰂈',
-  50: '󰢝',
-  60: '󰂉',
-  70: '󰢞',
-  80: '󰂊',
-  90: '󰂋',
-  100: '󰂅',
-};
+const BATTERY_LEVELS = {
+  0: 'empty',
+  25: 'caution',
+  50: 'low',
+  75: 'good',
+  100: 'full',
+} as const;
+
+type BatteryLevel = keyof typeof BATTERY_LEVELS;
+
+const battery = icons.battery;
 
 export const getBatteryIcon = (
-  percentage: number,
+  batteryPercentage: number,
   charging: boolean,
-  isCharged: boolean,
 ): string => {
-  const percentages = [100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0];
-  const foundPercentage =
-    percentages.find((threshold) => threshold <= percentage) ?? 100;
+  const percentages: BatteryLevel[] = [100, 75, 50, 25, 0];
+  let closest: BatteryLevel = 100;
 
-  if (isCharged) {
-    return '󱟢';
+  for (const percentage of percentages) {
+    if (
+      Math.abs(batteryPercentage - percentage) <
+      Math.abs(batteryPercentage - closest)
+    ) {
+      closest = percentage;
+    }
   }
+
+  const key = BATTERY_LEVELS[closest];
+
   if (charging) {
-    return batteryIconsCharging[foundPercentage];
+    return battery.charging[key];
   }
 
-  return batteryIcons[foundPercentage];
+  return battery.noCharging[key];
 };

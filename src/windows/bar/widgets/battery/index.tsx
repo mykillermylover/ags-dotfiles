@@ -6,27 +6,22 @@ import { getBatteryIcon } from './helpers';
 const battery = AstalBattery.get_default();
 
 export function Battery() {
-  const icon = Variable.derive(
-    [
-      bind(battery, 'percentage'),
-      bind(battery, 'charging'),
-      bind(battery, 'state'),
-    ],
-    (batteryPercentage, isCharging, state: AstalBattery.State) => {
-      const isCharged = state === AstalBattery.State.FULLY_CHARGED;
-      const percentage = Math.round(batteryPercentage * 100);
+  const percentage = bind(battery, 'percentage').as((p) => Math.round(p * 100));
 
-      return `${getBatteryIcon(percentage, isCharging, isCharged)} ${percentage}%`;
-    },
+  const icon = Variable.derive(
+    [percentage, bind(battery, 'charging')],
+    (percentage, isCharging) => getBatteryIcon(percentage, isCharging),
   );
   return (
-    <label
-      className="module-item"
-      onDestroy={() => {
-        icon.drop();
-      }}
-    >
-      {icon()}
-    </label>
+    <box className="module-item">
+      <icon icon={icon()} className="battery-icon" />
+      <label
+        onDestroy={() => {
+          icon.drop();
+        }}
+      >
+        {percentage.as((p) => `${p}%`)}
+      </label>
+    </box>
   );
 }

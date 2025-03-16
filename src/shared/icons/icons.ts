@@ -78,8 +78,20 @@ export default {
     },
   },
   battery: {
-    charging: 'battery-flash-symbolic',
-    warning: 'battery-empty-symbolic',
+    charging: {
+      empty: 'battery-empty-symbolic',
+      caution: 'battery-caution-charging-symbolic',
+      low: 'battery-low-charging-symbolic',
+      good: 'battery-good-charging-symbolic',
+      full: 'battery-full-charging-symbolic',
+    },
+    noCharging: {
+      empty: 'battery-empty-symbolic',
+      caution: 'battery-caution-symbolic',
+      low: 'battery-low-symbolic',
+      good: 'battery-good-symbolic',
+      full: 'battery-full-symbolic',
+    },
   },
   bluetooth: {
     type: {
