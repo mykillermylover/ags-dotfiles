@@ -2,8 +2,8 @@ import { networkService } from '@shared/globals';
 import { Variable } from 'astal';
 import { App } from 'astal/gtk3';
 
-import { WifiBTButton } from './WifiBTButton';
-import { WifiBTMenu } from './WifiBTMenu';
+import { WifiBTButton } from './WifiBluetoothButton';
+import { WifiBTMenu } from './WifiBluetoothMenu';
 
 type Page = 'wifi' | 'bluetooth';
 

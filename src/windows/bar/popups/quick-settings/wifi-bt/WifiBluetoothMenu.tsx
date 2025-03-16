@@ -1,6 +1,7 @@
 import { Binding, Variable } from 'astal';
 import { Gtk } from 'astal/gtk3';
 
+import { BluetoothPage } from './pages/Bluetooth';
 import { WifiPage } from './pages/Wifi';
 
 interface Props {
@@ -35,9 +36,7 @@ export function WifiBTMenu({ currentPage, revealChild }: Props) {
         >
           <WifiPage />
 
-          <box name="bluetooth">
-            <label>BLUETOOTH</label>
-          </box>
+          <BluetoothPage />
         </stack>
       </box>
     </revealer>

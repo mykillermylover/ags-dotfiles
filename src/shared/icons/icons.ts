@@ -82,6 +82,11 @@ export default {
     warning: 'battery-empty-symbolic',
   },
   bluetooth: {
+    type: {
+      mouse: 'input-mouse-symbolic',
+      headset: 'audio-headset-symbolic',
+      headphones: 'audio-headset-symbolic',
+    },
     enabled: 'bluetooth-active-symbolic',
     disabled: 'bluetooth-disabled-symbolic',
   },
