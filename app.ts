@@ -1,5 +1,6 @@
 #!/usr/bin/gjs -m
-import { hyprDispatchExec, hyprlandService } from '@shared/globals';
+import { requestHandler, restartApp } from '@request-handler';
+import { hyprlandService } from '@shared/globals';
 import { registerWindows } from '@shared/utils';
 import { WINDOWS } from '@windows';
 import Bar from '@windows/bar/Bar';
@@ -14,8 +15,7 @@ App.start({
     App.get_monitors().map(Bar);
     registerWindows(WINDOWS);
   },
+  requestHandler,
 });
 
-hyprlandService.connect('monitor-added', () => {
-  hyprDispatchExec('killall mshell; mshell');
-});
+hyprlandService.connect('monitor-added', restartApp);
