@@ -22,9 +22,9 @@ export default class MediaPlayerService extends GObject.Object {
     return this.#current;
   }
 
-  public onMetaChange<T>(callBack: () => T) {
+  public onMetaChange<T>(callback: (metadata?: Mpris.Player['metadata']) => T) {
     if (this.#current) {
-      return bind(this.#current, 'metadata').as(callBack);
+      return bind(this.#current, 'metadata').as(callback);
     }
   }
 

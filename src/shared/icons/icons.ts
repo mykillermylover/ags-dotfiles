@@ -1,4 +1,4 @@
-export default {
+const icons = {
   missing: 'image-missing-symbolic',
   app: {
     terminal: 'terminal-symbolic',
@@ -151,3 +151,6 @@ export default {
     light: 'light-mode-symbolic',
   },
 };
+
+export type Icons = typeof icons;
+export default icons;

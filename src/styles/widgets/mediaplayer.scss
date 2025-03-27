@@ -1,5 +1,6 @@
 @use '../variables' as *;
 @use 'sass:color';
+@use 'sass:map';
 
 $player-border-radius: calc($border-radius * 2);
 
@@ -60,8 +61,6 @@ $player-border-radius: calc($border-radius * 2);
 }
 
 .song-controls {
-  padding: 0 calc($container-padding * 15);
-
   .song-controls-item {
     margin: 0 $container-padding;
 
@@ -99,12 +98,54 @@ $player-border-radius: calc($border-radius * 2);
         -gtk-icon-transform: unset;
       }
     }
+
+  }
+
+  .volume-slider {
+    padding: 0;
+    margin: 0 $double-container-padding;
+
+    icon {
+      font-size: map.get($icon-sizes, 'small');
+      color: $tertiary;
+      margin-right: $container-padding;
+    }
+
+    contents trough {
+      background: $on-tertiary;
+
+      highlight {
+        background: $tertiary;
+      }
+
+      slider {
+        background: $tertiary-container;
+      }
+    }
+
+    &.invisible {
+      color: transparent;
+      background: transparent;
+
+      contents slider {
+        &:hover {
+          box-shadow: unset;
+        }
+        box-shadow: unset;
+      }
+
+      * {
+        color: transparent;
+        background: transparent;
+      }
+    }
   }
 }
 
 .mediaplayer-slider {
   min-width: calc($container-padding * 45);
   margin: calc($container-padding * 2) calc($container-padding * 1.5);
+  padding: 0 calc($container-padding * 15);
 
   scale contents trough:hover {
     box-shadow: 0 0 2px -.5px $primary;

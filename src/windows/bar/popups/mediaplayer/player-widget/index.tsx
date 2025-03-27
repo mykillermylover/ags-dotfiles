@@ -1,7 +1,7 @@
+import { MediaPlayerService } from '@shared/connectables';
 import { bind } from 'astal';
-import { MediaPlayerService } from 'shared/connectables';
 
-import { MediaPlayer } from './widgets';
+import { MediaPlayer } from './MediaPlayer';
 
 const mediaPlayer = MediaPlayerService.get_default();
 

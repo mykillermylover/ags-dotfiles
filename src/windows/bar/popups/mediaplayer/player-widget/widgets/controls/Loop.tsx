@@ -26,6 +26,7 @@ export function Loop({ player }: PlayerProps) {
       case UNSUPPORTED: {
         iconClass = 'unsupported';
       }
+      // eslint-disable-next-line no-fallthrough
       default: {
         icon.set(none);
       }

@@ -1,8 +1,7 @@
 import { openPopup } from '@shared/utils';
+import { getPlayerIcon } from '@windows/bar/popups/mediaplayer/player-widget/helpers';
 import { Binding } from 'astal';
 import Mpris from 'gi://AstalMpris';
-
-import { getPlayerIcon } from '../mediaplayer/helpers';
 
 interface MediaButtonProps {
   player: Mpris.Player;

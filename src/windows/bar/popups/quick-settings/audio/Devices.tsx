@@ -1,5 +1,4 @@
 import { Binding } from 'astal';
-import { Gtk } from 'astal/gtk3';
 import Wp from 'gi://AstalWp';
 
 import { PlaybackDevice } from './PlaybackDevice';

@@ -1,8 +1,9 @@
+import { MediaPlayerService } from '@shared/connectables';
 import { Popup } from '@shared/widgets';
-import { MediaPlayerWidget } from '@windows/bar/widgets/mediaplayer';
 import { bind } from 'astal';
 import { Gdk, Gtk } from 'astal/gtk3';
-import { MediaPlayerService } from '@shared/connectables';
+
+import { MediaPlayerWidget } from './player-widget';
 
 const mediaPlayerService = MediaPlayerService.get_default();
 

@@ -100,14 +100,8 @@ export class NotificationsMap implements Subscribable {
 
   clearNotifications = () => {
     const nList = this.#notifications.getMap();
-    if (nList.length === 0) return;
 
     const sub = interval(15, () => {
-      if (nList.length === 0) {
-        sub.cancel();
-        return;
-      }
-
       const item = nList.pop();
       if (!item) {
         sub.cancel();
@@ -116,6 +110,8 @@ export class NotificationsMap implements Subscribable {
 
       this.getNotification(item[0]).dismiss();
     });
+
+    return sub;
   };
 
   get() {

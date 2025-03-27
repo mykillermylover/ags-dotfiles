@@ -11,6 +11,9 @@ export function NotificationPanelHeader({ onDeleteClick, onDNDClick }: Props) {
   const dndClass = bind(notifdService, 'dontDisturb').as((value) =>
     value ? 'tertiary' : 'disabled',
   );
+  const dndTooltip = bind(notifdService, 'dontDisturb').as(
+    (value) => `Turn DND ${value ? 'off' : 'on'}`,
+  );
 
   const headerLabel = bind(notifdService, 'notifications').as(
     (notifications) => `NOTIFICATIONS (${notifications.length})`,
@@ -26,6 +29,7 @@ export function NotificationPanelHeader({ onDeleteClick, onDNDClick }: Props) {
           hexpand
           onClicked={onDNDClick}
           label="DND"
+          tooltipText={dndTooltip}
         />
         <label
           className="header-text"

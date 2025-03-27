@@ -1,4 +1,4 @@
-import { notifdService } from '@shared/globals';
+import { closePopup, notifdService } from '@shared/globals';
 import { AnchoredPopup } from '@shared/widgets/popups/anchored-popup';
 import { CHILD_POSITION } from '@shared/widgets/popups/anchored-popup/interfaces';
 import { bind } from 'astal';
@@ -6,6 +6,8 @@ import { bind } from 'astal';
 import { NotificationsMap } from '../helpers/notifications-map';
 import { NotificationPanelHeader } from './Header';
 import { Placeholder } from './Placeholder';
+
+const WINDOW_NAME = 'notification-panel';
 
 export function NotificationPanel() {
   const notifications = new NotificationsMap({ isPanel: true });
@@ -16,15 +18,18 @@ export function NotificationPanel() {
     notifdService.set_dont_disturb(!notifdService.get_dont_disturb());
   };
 
+  const handleDeleteClick = () => {
+    const interval = notifications.clearNotifications();
+
+    interval.connect('cancelled', () => closePopup(WINDOW_NAME));
+  };
+
   return (
-    <AnchoredPopup
-      position={CHILD_POSITION.TOP_CENTER}
-      name={'notification-panel'}
-    >
+    <AnchoredPopup position={CHILD_POSITION.TOP_CENTER} name={WINDOW_NAME}>
       <box widthRequest={400} vertical className="notification-panel">
         <NotificationPanelHeader
           onDNDClick={toggleDND}
-          onDeleteClick={notifications.clearNotifications}
+          onDeleteClick={handleDeleteClick}
         />
 
         <Placeholder visible={haveNotifications.as((v) => !v)} />

@@ -1,8 +1,8 @@
 import { icons } from '@shared/icons';
-import { PlayerProps } from '@windows/bar/widgets/mediaplayer/player.props';
 import { bind } from 'astal';
 import Mpris from 'gi://AstalMpris';
 
+import { PlayerProps } from '../../player.props';
 import { MediaControlButton } from './MediaControlButton';
 
 export function Shuffle({ player }: PlayerProps) {
