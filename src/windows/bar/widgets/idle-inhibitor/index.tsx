@@ -14,7 +14,10 @@ export function IdleInhibitor() {
           self.toggleClassName('activated', idleInhibit.get()),
         );
       }}
-      tooltipMarkup={getStateText('activated', 'deactivated')}
+      tooltipMarkup={getStateText(
+        'Inhibitor activated',
+        'Inhibitor deactivated',
+      )}
       label={getStateText('󰅶', '󰾪')}
       onClicked={toggleInhibit}
     />

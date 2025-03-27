@@ -1,4 +1,5 @@
 import { MediaPlayerService } from '@shared/connectables';
+import { centerMultilineString } from '@shared/utils';
 import { bind } from 'astal';
 import AstalMpris from 'gi://AstalMpris';
 
@@ -31,14 +32,13 @@ export function Media() {
 
     const lowerText = `${player.artist} - ${player.title}`;
 
-    const marginSize =
-      (lowerText.length - playbackStatus.length - player.identity.length - 1) /
-      2;
-    const margin = ' '.repeat(marginSize);
+    const upperText = `${playbackStatus} ${player.identity}`;
 
-    const upperText = `${margin}${playbackStatus} ${player.identity}${margin}`;
+    if (lowerText.length > 50) {
+      return centerMultilineString([upperText, player.artist, player.title]);
+    }
 
-    return `${upperText}\n${lowerText}`;
+    return centerMultilineString([upperText, lowerText]);
   };
 
   return (
