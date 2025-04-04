@@ -2,11 +2,13 @@ import { mprisService } from '@shared/globals';
 import { bind, GObject, property, register } from 'astal';
 import Mpris from 'gi://AstalMpris';
 
+import { MediaPlayer } from './interfaces';
+
 const { PLAYING } = Mpris.PlaybackStatus;
 
 @register({ GTypeName: 'MediaPlayerService' })
-export default class MediaPlayerService extends GObject.Object {
-  static instance: MediaPlayerService;
+export class MediaPlayerService extends GObject.Object implements MediaPlayer {
+  private static instance: MediaPlayerService;
 
   static get_default() {
     if (!this.instance) {
@@ -141,5 +143,17 @@ export default class MediaPlayerService extends GObject.Object {
     }
 
     return currentPlayer ?? players[0];
+  }
+
+  'play-pause'() {
+    this.#current?.play_pause();
+  }
+
+  previous() {
+    this.#current?.previous();
+  }
+
+  next() {
+    this.#current?.next();
   }
 }
