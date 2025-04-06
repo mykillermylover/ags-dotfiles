@@ -1,7 +1,12 @@
 import { timeout } from 'astal';
 
-export const delay = (ms: number): Promise<void> =>
-  new Promise((resolve) => timeout(ms, resolve));
+export const delay = (ms: number, callback?: () => void): Promise<void> =>
+  new Promise((resolve) =>
+    timeout(ms, () => {
+      callback?.();
+      resolve();
+    }),
+  );
 
 export const centerMultilineString = (multiLineString: string | string[]) => {
   const strings = Array.isArray(multiLineString)

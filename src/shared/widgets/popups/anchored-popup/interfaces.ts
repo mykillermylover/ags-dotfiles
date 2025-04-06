@@ -12,6 +12,8 @@ export enum CHILD_POSITION {
 export interface PopupProps {
   name: string;
   position?: CHILD_POSITION;
+  backdrop?: boolean;
+  container?: boolean;
 }
 
 export interface LayoutProps extends Pick<PopupProps, 'position'> {

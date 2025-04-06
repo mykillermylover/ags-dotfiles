@@ -10,6 +10,8 @@ import { Layout } from './Layout';
 export function AnchoredPopup({
   name,
   position,
+  backdrop,
+  container = true,
   ...props
 }: PopupProps & BoxProps) {
   const { TOP, BOTTOM, LEFT, RIGHT } = Astal.WindowAnchor;
@@ -42,7 +44,7 @@ export function AnchoredPopup({
         }
       }}
     >
-      <eventbox onClick={hideOnClick}>
+      <eventbox onClick={hideOnClick} className={backdrop ? 'backdrop' : ''}>
         <Layout position={position}>
           <eventbox
             setup={(self) => {
@@ -57,7 +59,7 @@ export function AnchoredPopup({
           >
             <box
               setup={(self) => {
-                self.toggleClassName('container');
+                self.toggleClassName('container', container);
               }}
               {...props}
             />

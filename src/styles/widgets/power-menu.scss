@@ -1,0 +1,30 @@
+@use '../variables' as *;
+
+.power-menu {
+  .container {
+    border-radius: 100%;
+    padding: 0;
+  }
+  .power-menu-button {
+    margin: $double-container-padding;
+
+    .shutdown icon {
+      margin-left: $button-padding;
+    }
+
+    button {
+      min-width: 100px;
+      min-height: 100px;
+
+      icon {
+        font-size: calc($font-size * 5);
+        color: $primary;
+      }
+    }
+
+    label {
+      color: $primary;
+    }
+  }
+
+}

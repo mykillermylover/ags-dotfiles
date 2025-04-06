@@ -1,7 +1,8 @@
-import { exec } from 'astal';
+import { openPopup } from '@shared/utils';
+import { Gtk } from 'astal/gtk3';
 
 export function PowerMenu() {
-  const onClicked = () => exec('wlogout');
+  const onClicked = (widget: Gtk.Widget) => openPopup(widget, 'power-menu');
   return (
     <button
       className="txt-icon module-item"
