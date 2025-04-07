@@ -24,7 +24,8 @@
         "build-and-update": "npm run build && npm run update-binary",
         "bundle": "ags bundle app.ts mshell",
         "lint": "eslint --ignore-pattern '@girs/**'",
-        "lint-fix": "eslint --ignore-pattern '@girs/**' --fix"
+        "lint-fix": "eslint --ignore-pattern '@girs/**' --fix",
+        "run dev": "bash './run dev.sh'"
     },
     "type": "module"
 }
