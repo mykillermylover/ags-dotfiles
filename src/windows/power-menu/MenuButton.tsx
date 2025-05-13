@@ -16,7 +16,7 @@ export function PowerMenuButton({ itemName, ...props }: Props & ButtonProps) {
 
   const handleMenuClick = () =>
     execAsync(createCommand(itemName))
-      .then(async () => delay(1000, () => closePopup(POWER_MENU_WINDOW)))
+      .then(async () => delay(500, () => closePopup(POWER_MENU_WINDOW)))
       .catch(console.error);
 
   const lowerCaseItem = itemName.toLowerCase() as Lowercase<PowerMenuItem>;

@@ -21,5 +21,5 @@ export const createCommand = (text: PowerMenuItem) => {
     }
   }
 
-  return `bash -c "sleep 1; ${command}"`;
+  return `bash -c "sleep 0.5; ${command}"`;
 };

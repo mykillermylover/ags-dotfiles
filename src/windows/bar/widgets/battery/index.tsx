@@ -7,21 +7,20 @@ const battery = AstalBattery.get_default();
 
 export function Battery() {
   const percentage = bind(battery, 'percentage').as((p) => Math.round(p * 100));
-
   const icon = Variable.derive(
-    [percentage, bind(battery, 'charging')],
-    (percentage, isCharging) => getBatteryIcon(percentage, isCharging),
+    [bind(battery, 'iconName'), bind(battery, 'batteryIconName')],
+    getBatteryIcon,
   );
+
   return (
-    <box className="module-item">
+    <box
+      className="module-item"
+      onDestroy={() => {
+        icon.drop();
+      }}
+    >
       <icon icon={icon()} className="battery-icon" />
-      <label
-        onDestroy={() => {
-          icon.drop();
-        }}
-      >
-        {percentage.as((p) => `${p}%`)}
-      </label>
+      <label>{percentage.as((p) => `${p}%`)}</label>
     </box>
   );
 }

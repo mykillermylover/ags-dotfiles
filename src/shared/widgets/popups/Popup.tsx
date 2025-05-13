@@ -1,4 +1,5 @@
 import { globalPopupEventBoxes } from '@shared/globals';
+import { bind } from 'astal';
 import { App, Astal, Gdk, Gtk } from 'astal/gtk3';
 import { BoxProps, EventBox } from 'astal/gtk3/widget';
 
@@ -8,12 +9,14 @@ interface PopupProps {
   name: string;
   position?: [x: number, y: number] | [x: number];
   windowKeyPressHandler?: (key: number) => void;
+  handleVisibleChange?: (visibility: boolean) => void;
 }
 
 export function Popup({
   name,
   position,
   windowKeyPressHandler,
+  handleVisibleChange = () => null,
   ...props
 }: PopupProps & BoxProps) {
   const { TOP, LEFT, RIGHT, BOTTOM } = Astal.WindowAnchor;
@@ -52,6 +55,9 @@ export function Popup({
         }
 
         windowKeyPressHandler?.(key);
+      }}
+      setup={(self) => {
+        bind(self, 'visible').subscribe(handleVisibleChange);
       }}
     >
       <eventbox onButtonPressEvent={hideOnClick}>

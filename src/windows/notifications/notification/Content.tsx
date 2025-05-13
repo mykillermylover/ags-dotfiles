@@ -32,6 +32,7 @@ export function Content({ notification }: NotificationProps) {
           className="summary"
           halign={START}
           xalign={0}
+          useMarkup
           label={summary}
           truncate
         />

@@ -5,10 +5,13 @@ export function TemperatureInfo() {
   const temperature = TemperatureService.get_default();
 
   return (
-    <label className="sys-info-item">
-      {bind(temperature, 'temperature').as(
-        (value) => '' + value.toFixed(0) + '℃',
-      )}
-    </label>
+    <box className="sys-info-item">
+      <label label="" className="txt-icon" />
+      <label
+        label={bind(temperature, 'temperature').as(
+          (value) => value.toFixed(0) + '℃',
+        )}
+      />
+    </box>
   );
 }
