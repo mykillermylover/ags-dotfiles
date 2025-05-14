@@ -19,10 +19,10 @@
     "main": "app.ts",
     "name": "mshell",
     "scripts": {
-        "build": "npm run bundle && chmod +x ./mshell",
+        "build": "npm run bundle && chmod +x ./build/mshell",
         "update-binary": "cp -f ./scripts/run.sh ~/.bin/mshell",
         "build-and-update": "npm run build && npm run update-binary",
-        "bundle": "ags bundle app.ts mshell",
+        "bundle": "ags bundle app.ts ./build/mshell",
         "lint": "eslint --ignore-pattern '@girs/**'",
         "lint-fix": "eslint --ignore-pattern '@girs/**' --fix",
         "run dev": "bash './run dev.sh'"
