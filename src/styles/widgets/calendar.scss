@@ -3,6 +3,8 @@
 
 .calendar {
   border-radius: 0.4em;
+  font-size: 1.1em;
+  padding: 0.35em 0.7em;
   color: $primary;
 
   &:selected {
@@ -30,9 +32,6 @@
   &:indeterminate {
     color: color.adjust($primary, $alpha: -0.75);
   }
-
-  font-size: 1.1em;
-  padding: 0.35em;
 }
 
 label.calendar-icon {
