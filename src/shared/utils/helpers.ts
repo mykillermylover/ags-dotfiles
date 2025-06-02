@@ -1,4 +1,4 @@
-import { Time, timeout } from 'astal';
+import { Binding, Time, timeout, Variable } from 'astal';
 
 export const delay = (ms: number, callback?: () => void): Promise<void> =>
   new Promise((resolve) =>
@@ -44,3 +44,10 @@ export const centerMultilineString = (multiLineString: string | string[]) => {
 
   return result.join('\n');
 };
+
+export function useState<T>(initialState: T): [Binding<T>, (value: T) => void] {
+  const state = Variable(initialState);
+  const setState = (value: T) => state.set(value);
+
+  return [state(), setState];
+}

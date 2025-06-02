@@ -33,7 +33,7 @@ const getHelp = () => {
   let result = '';
 
   for (const [name, { description }] of Object.entries(handlers)) {
-    result += `${name.padEnd(15)} --${description}\n`;
+    result += `${name.padEnd(15)} -- ${description}\n`;
   }
 
   return result;
