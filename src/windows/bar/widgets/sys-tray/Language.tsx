@@ -2,7 +2,7 @@ import { hyprlandService } from '@shared/globals';
 import { exec, Variable } from 'astal';
 
 const initialLayout = exec(
-  'bash "/home/mykillermylover/.config/ags/scripts/keyboard-layout.sh"',
+  `bash -c '${SRC}/scripts/keyboard-layout.sh'`,
 );
 const activeKeyboard = exec(`bash -c 'hyprctl devices -j | 
   jq -r ".keyboards | map(select(.main)) | .[0] | .name"'`);
