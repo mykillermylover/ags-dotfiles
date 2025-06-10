@@ -38,15 +38,27 @@
         ]);
     in
     {
-      packages.${system}.default = ags.lib.bundle {
-        inherit pkgs;
-        src = ./.;
-        name = "mshell";
-        entry = "app.ts";
-        gtk4 = false;
+      packages.${system} = {
+        default = ags.lib.bundle {
+          inherit pkgs;
+          src = ./.;
+          name = "mshell";
+          entry = "app.ts";
+          gtk4 = false;
 
-        # additional libraries and executables to add to gjs' runtime
-        inherit extraPackages;
+          # additional libraries and executables to add to gjs' runtime
+          inherit extraPackages;
+        };
+
+        wrapper = pkgs.writeShellScriptBin "mshell" ''
+          # Exporting glib-networking modules
+          export GIO_EXTRA_MODULES="${pkgs.glib-networking}/lib/gio/modules"
+          if [ "$#" -eq 0 ]; then
+              exec ${self.packages.${system}.default}/bin/mshell
+          else
+              exec ${ags.packages.${system}.io}/bin/astal -i mshell "$@"
+          fi
+        '';
       };
 
       devShells.${system} = {
