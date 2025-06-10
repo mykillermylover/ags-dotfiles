@@ -25,7 +25,7 @@
         "bundle": "ags bundle app.ts ./build/mshell",
         "lint": "eslint --ignore-pattern '@girs/**'",
         "lint-fix": "eslint --ignore-pattern '@girs/**' --fix",
-        "run dev": "bash './run dev.sh'"
+        "dev": "bash './dev.sh'"
     },
     "type": "module"
 }

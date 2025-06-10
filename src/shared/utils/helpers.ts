@@ -1,4 +1,4 @@
-import { timeout } from 'astal';
+import { Binding, Time, timeout, Variable } from 'astal';
 
 export const delay = (ms: number, callback?: () => void): Promise<void> =>
   new Promise((resolve) =>
@@ -7,6 +7,19 @@ export const delay = (ms: number, callback?: () => void): Promise<void> =>
       resolve();
     }),
   );
+
+export function debounce<F extends (...args: Parameters<F>) => ReturnType<F>>(
+  func: F,
+  ms: number,
+) {
+  let debounceTimeout: Time;
+
+  return function (...args: Parameters<F>) {
+    debounceTimeout?.cancel();
+
+    debounceTimeout = timeout(ms, () => func(...args));
+  };
+}
 
 export const centerMultilineString = (multiLineString: string | string[]) => {
   const strings = Array.isArray(multiLineString)
@@ -31,3 +44,10 @@ export const centerMultilineString = (multiLineString: string | string[]) => {
 
   return result.join('\n');
 };
+
+export function useState<T>(initialState: T): [Binding<T>, (value: T) => void] {
+  const state = Variable(initialState);
+  const setState = (value: T) => state.set(value);
+
+  return [state(), setState];
+}

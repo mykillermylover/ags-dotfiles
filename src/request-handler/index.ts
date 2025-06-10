@@ -2,22 +2,52 @@ import { MediaPlayerService } from '@shared/connectables';
 import { PlayerAction } from '@shared/connectables/mediaplayer';
 import { hyprDispatchExec } from '@shared/globals';
 
+export const restartApp = () => hyprDispatchExec('killall mshell; mshell');
+
+export const playerAction = (action: PlayerAction) => {
+  const mediaplayer = MediaPlayerService.get_default();
+
+  mediaplayer[action]();
+};
+
+const handlers: Record<string, { description: string; handler: () => void }> = {
+  restart: {
+    description: 'Restart app',
+    handler: restartApp,
+  },
+  'play-pause': {
+    description: 'Start-stop current player',
+    handler: () => playerAction('play-pause'),
+  },
+  previous: {
+    description: 'Play prev track on current player',
+    handler: () => playerAction('previous'),
+  },
+  next: {
+    description: 'Play next track on current player',
+    handler: () => playerAction('next'),
+  },
+};
+
+const getHelp = () => {
+  let result = '';
+
+  for (const [name, { description }] of Object.entries(handlers)) {
+    result += `${name.padEnd(15)} -- ${description}\n`;
+  }
+
+  return result;
+};
+
 export function requestHandler(
   request: string,
   res: (response: unknown) => void,
 ): void {
   try {
-    switch (request) {
-      case 'restart': {
-        restartApp();
-        break;
-      }
-      case 'play-pause':
-      case 'previous':
-      case 'next': {
-        playerAction(request);
-        break;
-      }
+    if (request === 'help') {
+      res(getHelp());
+    } else {
+      handlers[request]?.handler();
     }
 
     res(`${request} OK`);
@@ -27,11 +57,3 @@ export function requestHandler(
     res(`${request} ERROR: ${error?.message}`);
   }
 }
-
-export const restartApp = () => hyprDispatchExec('killall mshell; mshell');
-
-export const playerAction = (action: PlayerAction) => {
-  const mediaplayer = MediaPlayerService.get_default();
-
-  mediaplayer[action]();
-};

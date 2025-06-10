@@ -1,4 +1,4 @@
-import { AppMenu } from '@windows/bar/widgets/AppMenu';
+import { AppMenuButton } from '@windows/bar/widgets/AppMenuButton.tsx';
 import { IdleInhibitor } from '@windows/bar/widgets/idle-inhibitor';
 import { ModuleSeparator } from '@windows/bar/widgets/ModuleSeparator';
 import { SysInfo } from '@windows/bar/widgets/sys-info';
@@ -16,7 +16,7 @@ export function LeftModule({ gdkMonitor }: LeftModuleProps) {
       halign={Gtk.Align.START}
       className="container module left-module"
     >
-      <AppMenu />
+      <AppMenuButton />
 
       <SysInfo />
 

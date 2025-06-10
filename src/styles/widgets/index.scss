@@ -2,9 +2,9 @@
 @use 'shared';
 @use 'check-radio-buttons';
 @use 'menu';
-@use 'app-menu';
 
 // widgets
+@use 'app-menu-button';
 @use 'bar';
 @use 'battery';
 @use 'modules';
