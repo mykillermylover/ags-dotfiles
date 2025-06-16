@@ -63,6 +63,7 @@
 
       devShells.${system} = {
         default = pkgs.mkShell {
+          name = "mshell dev";
           buildInputs = [
             # includes astal3 astal4 astal-io by default
             (ags.packages.${system}.default.override {
