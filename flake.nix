@@ -8,6 +8,11 @@
       url = "github:aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    astal = {
+      url = "github:aylur/astal";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -15,6 +20,7 @@
       self,
       nixpkgs,
       ags,
+      astal,
     }:
     let
       system = "x86_64-linux";
@@ -64,12 +70,38 @@
       devShells.${system} = {
         default = pkgs.mkShell {
           name = "mshell dev";
-          buildInputs = [
-            # includes astal3 astal4 astal-io by default
-            (ags.packages.${system}.default.override {
-              inherit extraPackages;
-            })
+
+          buildInputs = with pkgs; [
+            ags.packages.${system}.ags
+            astal.packages.${system}.astal3
+            astal.packages.${system}.io
+            gjs
           ];
+
+          shellHook = ''
+            # Exporting glib-networking modules
+            export GIO_EXTRA_MODULES="${pkgs.glib-networking}/lib/gio/modules"
+
+            if [ "''${PWD##*/}" = "ags" ]; then
+              echo "Generate types? (y/N)"
+              read consent
+
+              if [ "$consent" = "y" ]; then
+                echo "Generating types..."
+                ags types -d .;
+              fi
+
+              echo "Initialise astal (required for typescript server to work)? (y/N)"
+              read consent
+              if [ "$consent" = "y" ]; then
+                mkdir -p node_modules;
+                ln -sf ${astal.packages.${system}.gjs}/share/astal/gjs ./node_modules/astal
+              fi
+
+            else
+              echo "You're not in the ags root directory, initialisation failed"
+            fi
+          '';
         };
       };
     };
