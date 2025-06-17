@@ -1,8 +1,8 @@
 import { MediaPlayerService } from '@shared/connectables';
 import { PlayerAction } from '@shared/connectables/mediaplayer';
-import { hyprDispatchExec } from '@shared/globals';
+import { execAsync } from 'astal';
 
-export const restartApp = () => hyprDispatchExec('killall mshell; mshell');
+export const restartApp = () => execAsync('bash -c "mshell -q; mshell"');
 
 export const playerAction = (action: PlayerAction) => {
   const mediaplayer = MediaPlayerService.get_default();
