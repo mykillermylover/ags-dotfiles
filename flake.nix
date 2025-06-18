@@ -17,10 +17,10 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       ags,
       astal,
+      ...
     }:
     let
       system = "x86_64-linux";
@@ -42,10 +42,9 @@
           libgtop
           lm_sensors
         ]);
-    in
-    {
-      packages.${system} = {
-        default = ags.lib.bundle {
+
+      mshellPackages = rec {
+        mshell = ags.lib.bundle {
           inherit pkgs;
           src = ./.;
           name = "mshell";
@@ -56,16 +55,21 @@
           inherit extraPackages;
         };
 
-        wrapper = pkgs.writeShellScriptBin "mshell" ''
+        mshell-wrapped = pkgs.writeShellScriptBin "mshell" ''
           # Exporting glib-networking modules
           export GIO_EXTRA_MODULES="${pkgs.glib-networking}/lib/gio/modules"
           if [ "$#" -eq 0 ]; then
-              exec ${self.packages.${system}.default}/bin/mshell
+              exec ${mshell}/bin/mshell
           else
               exec ${ags.packages.${system}.io}/bin/astal -i mshell "$@"
           fi
         '';
       };
+    in
+    {
+      packages.${system} = mshellPackages;
+
+      overlays.default = final: prev: mshellPackages;
 
       devShells.${system} = {
         default = pkgs.mkShell {
