@@ -79,23 +79,29 @@
           ];
 
           shellHook = ''
-            # Exporting glib-networking modules
-            export GIO_EXTRA_MODULES="${pkgs.glib-networking}/lib/gio/modules"
-
             if [ "''${PWD##*/}" = "ags" ]; then
-              echo "Generate types? (y/N)"
-              read consent
 
-              if [ "$consent" = "y" ]; then
-                echo "Generating types..."
-                ags types -d .;
-              fi
+              # Exporting glib-networking modules
+              export GIO_EXTRA_MODULES="${pkgs.glib-networking}/lib/gio/modules"
 
-              echo "Initialise astal (required for typescript server to work)? (y/N)"
-              read consent
-              if [ "$consent" = "y" ]; then
+              if ! test -L ./node_modules/astal; then
+                echo ""
+                echo "💡 Initialising astal... (required for typescript server to work)"
+
                 mkdir -p node_modules;
                 ln -sf ${astal.packages.${system}.gjs}/share/astal/gjs ./node_modules/astal
+
+                echo "💡 Done."
+                echo ""
+              fi
+
+              if ! test -d ./@girs; then
+                echo ""
+                echo "💡 Generating types..."
+
+                ags types -d .;
+                
+                echo ""
               fi
 
             else
