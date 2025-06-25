@@ -41,6 +41,9 @@
         ++ (with pkgs; [
           libgtop
           lm_sensors
+          glib
+          bluez
+          bluez-tools
         ]);
 
       mshellPackages = rec {
@@ -75,11 +78,11 @@
         default = pkgs.mkShell {
           name = "mshell dev";
 
-          buildInputs = with pkgs; [
-            ags.packages.${system}.ags
-            astal.packages.${system}.astal3
-            astal.packages.${system}.io
-            gjs
+          buildInputs = [
+            # includes astal3 astal4 astal-io by default
+            (ags.packages.${system}.default.override {
+              inherit extraPackages;
+            })
           ];
 
           shellHook = ''
