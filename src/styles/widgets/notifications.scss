@@ -119,6 +119,7 @@
       min-height: calc($container-padding * 8);
       background-size: contain;
       background-position: center;
+      border-radius: calc($border-radius / 2);
     }
 
     .icon-image {
