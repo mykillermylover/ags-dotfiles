@@ -1,7 +1,8 @@
 #!/usr/bin/gjs -m
-import { requestHandler, restartApp } from '@request-handler';
+import { requestHandler } from '@request-handler';
 import { hyprlandService } from '@shared/globals';
 import { registerWindows } from '@shared/utils';
+import { tryRender } from '@shared/utils/monitors.ts';
 import { WINDOWS } from '@windows';
 import Bar from '@windows/bar/Bar';
 import { App } from 'astal/gtk3';
@@ -18,4 +19,6 @@ App.start({
   requestHandler,
 });
 
-hyprlandService.connect('monitor-added', restartApp);
+hyprlandService.connect('monitor-added', async (_, m) => {
+  await tryRender(m);
+});
