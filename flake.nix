@@ -78,11 +78,12 @@
         default = pkgs.mkShell {
           name = "mshell dev";
 
-          buildInputs = [
+          buildInputs = with pkgs; [
             # includes astal3 astal4 astal-io by default
             (ags.packages.${system}.default.override {
               inherit extraPackages;
             })
+            inotify-tools
           ];
 
           shellHook = ''
