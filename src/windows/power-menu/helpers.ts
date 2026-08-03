@@ -16,7 +16,7 @@ export const createCommand = (text: PowerMenuItem) => {
       break;
     }
     case 'Logout': {
-      command = 'hyprctl dispatch exit;';
+      command = "hyprctl dispatch 'hl.dsp.exit()';";
       break;
     }
   }
