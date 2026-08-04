@@ -1,5 +1,5 @@
 import { hyprlandService } from '@shared/globals';
-import { bind, Binding, Variable } from 'astal';
+import { bind, Binding, execAsync, Variable } from 'astal';
 import Hyprland from 'gi://AstalHyprland';
 
 export function Workspace(props: {
@@ -22,7 +22,7 @@ export function Workspace(props: {
   return (
     <button
       cursor="pointer"
-      onClick={() => workspace.focus()}
+      onClick={() => execAsync(`hyprctl dispatch 'hl.dsp.focus({ workspace = "${workspace.id}" })'`)}
       className="workspace-button"
       setup={(self) => {
         const toggleClassNameHook = (
